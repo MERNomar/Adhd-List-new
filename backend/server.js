@@ -1,7 +1,8 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
-const todoRoutes = require('./routes/todos')
+const todoRoutes = require('./routes/todoRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 // environment variables 
 require('dotenv').config()
@@ -9,12 +10,9 @@ const port = process.env.PORT
 const mongoLink = process.env.DATABASE_LINK
 
 // middlewares
-app.use('*' , (req , res , next) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    next()
-} )
 app.use(express.json());
-app.use( '/api' ,todoRoutes)
+app.use( '/api/user' ,userRoutes)
+app.use( '/api/todos' ,todoRoutes)
 
 app.listen(port ,() => {
     mongoose.connect(mongoLink)
