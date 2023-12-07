@@ -10,7 +10,15 @@ const createToken = (_id) => {
 
 
 const userLogin = (req , res) => {
-    res.send("login")
+    const { password , email} = req.body
+
+    User.login( email , password )
+    .then(response => {
+       const token = createToken(response._id) 
+       return {token , email : response.email}
+    })
+    .then(response => res.status(200).json(response))
+    .catch(error =>res.status(400).json(error.message))
 }
 
 const userSignup = (req , res) =>  {
