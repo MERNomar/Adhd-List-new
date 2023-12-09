@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const todoControllers = require('../controllers/todoControllers')
+const authMiddleware = require('../middleware/authMIddleware')
 
+router.use(authMiddleware);
 
 router.get('/get-all' , todoControllers.getTodos) 
 
