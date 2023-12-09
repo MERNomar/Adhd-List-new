@@ -8,8 +8,11 @@ import {
 import { QueryClient, QueryClientProvider } from "react-query";
 import TodoList from "./components/TodoMangement/TodoList.jsx";
 import { ReactQueryDevtools } from "react-query/devtools";
+import MainRoot from "./components/landingPage/MainRoot.jsx";
+import SignupPage from "./components/landingPage/SignupPage.jsx";
+import LoginPage from "./components/landingPage/LoginPage.jsx";
 import LandingPage from "./components/landingPage/LandingPage.jsx";
-import Main from "./components/landingPage/Main.jsx";
+
 
 
 const queryClient = new QueryClient();
@@ -18,14 +21,22 @@ const queryClient = new QueryClient();
 
 
 const router = createBrowserRouter([
+  
   {
     path: "/",
-    element: <LandingPage />,
+    element: <MainRoot />,
     children: [
-      { path: "/", element: <Main /> },
-    ],
+      { path: "/", element: <LandingPage /> },
+    ],  
   },
-
+  {
+    path : "/auth",
+    children : [
+      { path: "login", element:  <LoginPage/> },
+      { path: "signup", element: <SignupPage/> },
+      { path: "", loader : () => redirect('/auth/login')},
+    ]
+  },
   
   {
     path: "/todos",
