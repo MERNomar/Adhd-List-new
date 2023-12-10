@@ -1,41 +1,64 @@
-import { Link, Outlet } from "react-router-dom"
-import logo from '../../components/assets/png/template.png'
-import GitHubIcon from '@mui/icons-material/GitHub';
-import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import checkMark from "../assets/png/checkMark.png";
-import { useDrawer } from "../../store/todoState";
-import { useEffect, useState } from "react";
-import useWindowDimensions from "../../hooks/getWindowDimensions";
+import Demo from "../assets/png/Demo.png";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import UILink from "@mui/material/Link";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Grow from "@mui/material/Grow";
 
-export default function LandingPage(){
-    const [isSizeOk , setIsSizeOk] = useState()
-    const { height, width } = useWindowDimensions();
-    useEffect(() => {
-        if(width <= 714.5) setIsSizeOk(true)
-        else setIsSizeOk(false)
-    },[width])
-
-    return (<>
-
-            <div  className="justify-between flex  items-center w-full m-0 p-1 bg-[#00000052] h-[55px]">
-           { <NavBarItems/>}
-            </div>
-
-        <Outlet/>
-        </>)
+export default function () {
+  return (
+    <>
+      <div className="mx-auto flex flex-col w-full bg-gradient-left  border-t border-[#00000036]  ">
+        <div className="flex-col gap-2 flex grow w-full my-20 lg:my-12 mx-auto items-center ">
+          <img src={checkMark} className="w-40 mb-1 m-auto" alt="checkMark" />
+          <Typography fontFamily={"monospace"} variant="h3" className="  ">
+            AdhdList
+          </Typography>
+          <Typography>Get your shit done !</Typography>
+          <Typography gutterBottom>
+            With AdhdList stop getting distracted and start getting your shit
+            done
+          </Typography>
+          <Link to="/todos/all">
+            <button className="bg-[#1454ca] hover:bg-[#0f4099] transition-all ease-in-out  duration-150 hover:px-3 p-1 px-2 rounded" size="small" variant="contained">
+              Start for free
+            </button>
+          </Link>
+        </div>
+        <div className="mx-auto flex my-auto w-full border-t bg-[#0c0c0c31] border-[#0000003a] py-16">
+          <div className="m-auto py-5 ">
+            <List>
+              <Grow in timeout={400}>
+                <ListItem> ✦ Track your Time </ListItem>
+              </Grow>
+              <Grow in timeout={800}>
+                <ListItem> ✦ Stop getting distracted </ListItem>
+              </Grow>
+              <Grow in timeout={1200}>
+                <ListItem>
+                  {" "}
+                  ✦ Add steps and finish yor work more smoothly{" "}
+                </ListItem>
+              </Grow>
+              <Grow in timeout={1600}>
+                <ListItem> ✦ Become focused, organized, and calm </ListItem>
+              </Grow>
+              <Grow in timeout={2000}>
+                <ListItem> ✦ Completely free and open source </ListItem>
+              </Grow>
+            </List>
+          </div>
+          <Grow in timeout={2400}>
+            <img src={Demo} className="w-96 mb-1 m-auto " alt="Demo" />
+          </Grow>
+        </div>
+      </div>
+    </>
+  );
 }
 
-function NavBarItems() {
-
-return (<>
-    <Link className=" flex items-center mr-2 " to={'/'}><img className="w-10 ml-10" src={checkMark} alt="Logo" /><div className="ml-2 border-l-2 border-l-[#c2bfbf] px-2">AdhdList</div></Link>
-     
-    <div className=" flex items-center">
-    <a className="hover:bg-slate-700 p-1 rounded-xl mr-5 transition-colors duration-200" href="https://www.upwork.com/freelancers/~01156fadf38622e666" target="_blank" >UpWork</a>
-    <a className="hover:bg-slate-700 p-1 rounded-xl mr-5 transition-colors duration-200 " href="https://github.com/MERNomar/TodoList-react" target="_blank" ><GitHubIcon/></a>
-    <div className="border-l-2 border-[#ffffff3a] pl-2 "><Button variant="text" color="primary">Login</Button></div>
-    <div className="ml-3"><Button variant="contained"><Link to='todos/all'>Start now for free</Link></Button></div> 
-    </div>
-    </>
-)}
 
