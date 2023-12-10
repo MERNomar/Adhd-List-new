@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import {setCompleted} from "../../myAPIS"
+import {setCompleted} from "../../../myAPIS"
 import { Link, NavLink } from "react-router-dom";
-import { useStore } from "../../store/todoState";
+import { useStore } from "../../../store/todoState";
 import Checkbox from '@mui/material/Checkbox';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';

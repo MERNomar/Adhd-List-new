@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink  } from "react-router-dom";
-import logo from "../assets/png/checkmark.png";
-import { useDrawer } from "../../store/todoState";
+import logo from "../../assets/png/checkmark.png";
+import { useDrawer } from "../../../store/todoState";
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import MicrowaveIcon from '@mui/icons-material/Microwave';

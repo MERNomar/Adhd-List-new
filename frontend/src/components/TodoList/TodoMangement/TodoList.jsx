@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getTodos, postTodo } from "../../myAPIS";
+import { getTodos, postTodo } from "../../../myAPIS";
 import AddTodo from "./AddTodo"
 import MapTodos from "./MapTodos"
-import { useStore } from "../../store/todoState";
+import { useStore } from "../../../store/todoState";
 
 
 export default function TodoList({ category, header }) {

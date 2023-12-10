@@ -4,8 +4,8 @@ import UpdateSVG from '@mui/icons-material/SystemUpdateAltOutlined';
 import { useEffect, useState } from "react";
 import { useMutation , useQueryClient} from "react-query";
 // Apis and global states
-import { useStore } from "../../../store/todoState"
-import { putUpdateTodo} from "../../../myAPIS";
+import { useStore } from "../../../../store/todoState"
+import { putUpdateTodo} from "../../../../myAPIS";
 import AddSteps from "./AddSteps"
 import MapSteps from "./MapSteps"
 import StopWatch from "./StopWatch"

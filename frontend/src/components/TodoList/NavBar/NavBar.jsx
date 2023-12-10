@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { useDrawer } from '../../store/todoState'
-import useWindowDimensions from '../../hooks/getWindowDimensions'
+import { useDrawer } from '../../../store/todoState'
+import useWindowDimensions from '../../../hooks/getWindowDimensions'
 import { Dehaze , Person , GitHub , Brightness4} from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 

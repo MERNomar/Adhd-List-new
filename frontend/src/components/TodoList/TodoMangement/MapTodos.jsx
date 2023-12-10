@@ -2,7 +2,7 @@ import { Box, List , Typography , ListItem} from "@mui/material";
 import TodoItem from "./TodoItem";
 import { TransitionGroup } from 'react-transition-group';
 import Collapse from '@mui/material/Collapse';
-import { useStore } from "../../store/todoState";
+import { useStore } from "../../../store/todoState";
 
 
 export default function AllTodos({ category }) {

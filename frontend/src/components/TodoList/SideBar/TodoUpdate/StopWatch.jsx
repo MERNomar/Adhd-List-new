@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useStopwatch } from "react-timer-hook";
 // Apis and global states
-import { useStore } from "../../../store/todoState";
+import { useStore } from "../../../../store/todoState";
 import Switch from "@mui/material/Switch";
 
 export default function StopWatch() {

@@ -1,50 +1,85 @@
-import { Outlet } from "react-router-dom";
-import SideDrawer from "./components/SideBar/SideDrawer";
-import { useQuery } from "react-query";
-import { getTodos } from "./myAPIS";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useDrawer , useStore } from "./store/todoState";
-import NavBar from "./components/NavBar/NavBar";
-import { useEffect } from "react";
+import AdhdRoot from "./components/TodoList/AdhdRoot.jsx";
+import "./index.css";
+import {
+  createBrowserRouter,
+  redirect,
+  RouterProvider,
+} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import TodoList from "./components/TodoList/TodoMangement/TodoList.jsx";
+import { ReactQueryDevtools } from "react-query/devtools";
+import LandingRoot from "./components/landingPage/LandingRoot.jsx";
+import SignupPage from "./components/authComponents/SignupPage.jsx";
+import LoginPage from "./components/authComponents/LoginPage.jsx";
+import LandingPage from "./components/landingPage/LandingPage.jsx";
 
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-  },
-});
 
-export default function App() {
-    
-  const isSideNavOpen = useDrawer(nav => nav.isSideNavOpen)
-  const setIsSideNavOpen = useDrawer(nav => nav.setIsSideNavOpen)
-  const isSizeOk = useDrawer(nav => nav.isSizeOk)
+const queryClient = new QueryClient();
 
-  const setAllTasks = useStore(store => store.setAllTasks)
   
 
-  const { data } = useQuery({
-    queryKey: ["todos"],
-    queryFn:  getTodos,
-})
-   
-  useEffect(
-    () => {
-      setAllTasks(data)
-    }
-    ,[data])
 
+const router = createBrowserRouter([
+  
+  {
+    path: "/",
+    element: <LandingRoot />,
+    children: [
+      { path: "/", element: <LandingPage /> },
+    ],  
+  },
+  {
+    path : "/auth",
+    children : [
+      { path: "login", element:  <LoginPage/> },
+      { path: "signup", element: <SignupPage/> },
+      { path: "", loader : () => redirect('/auth/login')},
+    ]
+  },
+  
+  {
+    path: "/todos",
+    element: <AdhdRoot />,
+    children: [
+      {
+        path: "all",
+        element: <TodoList   header="All Todos" category="all"/>,
+      },
+      {
+        path: "my-day",
+        element: <TodoList header="My day" category="day" />,
+      },
+      {
+        path: "work",
+        element: <TodoList header="Work" category="work" />,
+
+      },
+      {
+        path: "home",
+        element: <TodoList header="Home" category="home" />,
+      },
+      {
+        path: "important",
+        element: <TodoList header="Important !" category="important" />,
+      },
+      {
+        path: "overdue",
+        element: <TodoList header="Overdue" category="overdue" />,
+      },
+      {
+        path: "*",
+        element: <TodoList  header="All Todos" category="all"  />,
+      },
+    ],
+  },
+]);
+
+export default function Router() {
   return (
-    <ThemeProvider theme={darkTheme}>
-    <>
-      {isSideNavOpen && isSizeOk ? <div onClick={() => {setIsSideNavOpen(!isSideNavOpen)}} className="w-full h-full z-[70] fixed top-0 bottom-0 left-0 right-0 bg-black/70 transition-100 transition-colors"></div> : ""}
-        <div
-         className=" lg:ml-[286px] text-2xl mt-[70px] ">
-           <NavBar/>
-          <SideDrawer/>
-         <Outlet/>
-        </div>
-    </>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools/>
+    </QueryClientProvider>
   );
 }

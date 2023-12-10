@@ -17,7 +17,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <div className="justify-between flex  items-center w-full m-0 p-1 bg-[#00000052] h-[55px]">
+      <div className="justify-between flex  items-center w-full m-0 p-1 bg-[#00000052] h-[55px] dark:bg-white">
         {<NavBarItems />}
       </div>
 
