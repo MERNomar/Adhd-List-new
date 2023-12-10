@@ -25,9 +25,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingRoot />,
-    children: [
-      { path: "/", element: <LandingPage /> },
-    ],  
   },
   {
     path : "/auth",
@@ -77,9 +74,11 @@ const router = createBrowserRouter([
 
 export default function Router() {
   return (
+    <div className="">
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ReactQueryDevtools/>
     </QueryClientProvider>
+    </div>
   );
 }

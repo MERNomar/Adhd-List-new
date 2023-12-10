@@ -1,27 +1,18 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import upworkIcon from "../../components/assets/png/upwork.png";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Button } from "@mui/material";
 import checkMark from "../assets/png/checkMark.png";
-import { useDrawer } from "../../store/todoState";
-import { useEffect, useState } from "react";
-import useWindowDimensions from "../../hooks/getWindowDimensions";
+import LandingPage from "./LandingPage";
 
-export default function LandingPage() {
-  const [isSizeOk, setIsSizeOk] = useState();
-  const { height, width } = useWindowDimensions();
-  useEffect(() => {
-    if (width <= 714.5) setIsSizeOk(true);
-    else setIsSizeOk(false);
-  }, [width]);
-
+export default function LandingRoot() {
+ 
   return (
     <>
       <div className="justify-between flex  items-center w-full m-0 p-1 bg-[#00000052] h-[55px] dark:bg-white">
         {<NavBarItems />}
       </div>
+      <LandingPage/>
 
-      <Outlet />
     </>
   );
 }
@@ -50,9 +41,9 @@ function NavBarItems() {
           <GitHubIcon />
         </a>
         <NavLink className="border-l-2 border-[#ffffff3a] pl-2 ">
-          <Button variant="text" color="primary">
+          <button className="text-white transition-colors duration-75 p-1 px-2 rounded ml-3 hover:bg-[#ffffff2d]  " >
             Login
-          </Button>
+          </button>
         </NavLink>
       </div>
     </>

@@ -3,7 +3,6 @@ const app = express()
 const mongoose = require('mongoose')
 const todoRoutes = require('./routes/todoRoutes')
 const userRoutes = require('./routes/userRoutes')
-
 // environment variables 
 require('dotenv').config()
 const port = process.env.PORT
