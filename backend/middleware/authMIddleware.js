@@ -11,7 +11,6 @@ const authMiddleware =async (req , res , next) => {
     if (!authorization){
         return res.status(401).json({error : "You need to be authorized to access"})
     }
-    
     try {
         // this will spilt auth variable to two parts
         const token = authorization.split(' ')[1]

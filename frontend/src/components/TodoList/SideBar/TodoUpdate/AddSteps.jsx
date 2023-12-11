@@ -1,6 +1,5 @@
 import RoundPlus from '@mui/icons-material/AddCircleOutlined';
 import { useStore } from "../../../../store/todoState"
-import { IconButton } from "@mui/material";
 
 
 export default function AddSteps() {
@@ -17,15 +16,16 @@ export default function AddSteps() {
       setSidePanelItem({...sidePanelItem , steps : [...sidePanelItem.steps , {id : crypto.randomUUID() , step : InputValue}]});
     }
   
-    return (
+    return (<>
+    <div>Steps</div>
       <form
-      className="mt-5 flex justify-center"
+      className=" flex justify-center"
       onSubmit={(e) => {
         handleNewStep(e);
       }}
     >
-    <div
-     className="  w-[99%]  rounded-md py-[1px] px-1 bg-[#00000069]" 
+    <label
+     className="  flex justify-center rounded-md py-[1px] px-1 bg-[#00000069]" 
      >
               <input
                 disabled={!sidePanelItem}
@@ -36,10 +36,11 @@ export default function AddSteps() {
                 key={sidePanelItem._id}
                 placeholder={"Keep it simple!"}
               />
-              <IconButton type='submit'>
-                <RoundPlus   />
-                </IconButton>
-              </div>
+              <button className=' rounded-full transition-colors ease-in-out duration-100 hover:bg-slate-800 m-0 flex justify-center p-2'  type='submit'>
+                <RoundPlus className=''  />
+                </button>
+              </label>
     </form>
+    </>
     );
   }

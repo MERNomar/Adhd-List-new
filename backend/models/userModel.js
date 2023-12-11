@@ -13,7 +13,7 @@ const userSchema = new Schema({
 userSchema.statics.signup = async function( email , password , username) {
 
      //Add Check that both email and password exist 
-     if (!email || !password){
+     if (!email || !password || !username){
         throw Error("Please fill all fields")
      }
 
@@ -21,8 +21,12 @@ userSchema.statics.signup = async function( email , password , username) {
         throw Error("Please enter valid email")
     }
 
-    if(!validator.isStrongPassword(password)) {
+    if(!email.length >= 8) {
         throw Error("Please enter strong password")
+    }
+
+    if(!username.length >= 5) {
+        throw Error("Username is to short")
     }
     
     

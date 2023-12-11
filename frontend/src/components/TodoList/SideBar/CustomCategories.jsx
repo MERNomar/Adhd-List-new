@@ -4,7 +4,6 @@ import WorkSVG from "@mui/icons-material/BusinessCenterOutlined";
 import HomeSVG from "@mui/icons-material/HomeOutlined";
 import ImportantSVG from "@mui/icons-material/StarPurple500Outlined";
 import SadFaceSVG from "@mui/icons-material/SentimentDissatisfiedOutlined";
-import RingBellSVG from "@mui/icons-material/NotificationsNoneOutlined";
 import { NavLink } from "react-router-dom";
 
 export default function CustomCategories() {

@@ -37,3 +37,8 @@ export const useDrawer = create((set) => ({
     setIsSizeOk:(value) => set({isSizeOk : value}),
 }))
 
+export const useDarkMode = create((set) => ({
+  darkMode : false,
+  setDarkMode:() => set((item) =>( {darkMode : !item.darkMode})),
+}))
+

@@ -44,6 +44,7 @@ export default function StopWatch() {
   return (
     <>
       <hr className="border-[#b2ddee41] my-4"></hr>
+      <p>Track Time</p>
       <div className="ml-4">
         <div className={`flex text-[30px] transition-colors  duration-200 mt-4  ${isRunning && "text-[#89c0ed]	"}`}>
           <div >{`  ${hours} hrs  ${formatTime(minutes)} m`}</div>

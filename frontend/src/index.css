@@ -14,6 +14,15 @@
     .tool-info{
       @apply ml-20 flex text-white items-center hover:bg-[#0000003f] mr-52 py-14 rounded-lg select-none cursor-pointer h-20
     }
+    .nav-item{
+      @apply justify-center hover:bg-slate-600 transition-colors ease-in-out duration-100 rounded-full py-1 w-8 m-2 flex  p-2
+    }
+    .icon-button{
+      @apply m-0
+    }
+    .drawer-button{
+      @apply  m-auto p-1 pb-2 px-6 hover:bg-slate-700 transition-colors ease-in-out duration-100 rounded-lg
+    }
   }
 
 .active {
@@ -50,4 +59,5 @@
 .font-mont{
   font-family: 'Montserrat', sans-serif;
 }
+
 

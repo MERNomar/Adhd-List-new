@@ -1,9 +1,11 @@
 import ky from "ky";
 
-export const getTodos = async () => {
+export const getTodos = async (token) => {
   try {
-    const res = await ky.get("/api/todos/get-all");
-    return res.json();
+    return await ky.get("/api/todos/get-all" , {
+       headers : {
+        authorization: `token ${token}`
+      }}).json()
   } catch (err) {
     console.log(err);
   }
@@ -46,7 +48,9 @@ export const putUpdateTodo = async ({id , sidePanelItem}) => {
     const data = await res.json();
     return data
   } catch (err) {
+    console.log(err);
   }
 };
+
 
 

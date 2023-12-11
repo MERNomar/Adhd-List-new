@@ -18,7 +18,7 @@ const userLogin = (req , res) => {
        return {token , email : response.email}
     })
     .then(response => res.status(200).json(response))
-    .catch(error =>res.status(400).json(error.message))
+    .catch(error =>res.status(409).json(error.message))
 }
 
 const userSignup = (req , res) =>  {
@@ -27,10 +27,10 @@ const userSignup = (req , res) =>  {
     User.signup( email , password , username )
     .then(response => {
        const token = createToken(response._id) 
-       return {token , email : response.email}
+       return {token , email : response.email , username}
     })
     .then(response => res.status(200).json(response))
-    .catch(error =>res.status(400).json(error.message))
+    .catch(error =>res.status(409).json(error.message))
 } 
 
 module.exports = {userLogin , userSignup}

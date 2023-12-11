@@ -10,7 +10,6 @@ import AddSteps from "./AddSteps"
 import MapSteps from "./MapSteps"
 import StopWatch from "./StopWatch"
 import EditIcon from '@mui/icons-material/Edit';
-import { IconButton } from "@mui/material";
 
 
 
@@ -61,6 +60,8 @@ function UpdateTitle () {
     setSidePanelItem({...sidePanelItem , title : title})
   };
   return (
+    <>
+    <div>Update</div>
   <form
   className="mt-5 flex justify-center"
   onSubmit={(e) => {
@@ -68,7 +69,7 @@ function UpdateTitle () {
   }}
 >
 <div
- className="  w-[99%]  rounded-md py-[1px] px-1 bg-[#00000069]" 
+ className="   flex justify-center rounded-md py-[1px] px-1 bg-[#00000069]" 
  >
           <input
             disabled={!sidePanelItem}
@@ -80,11 +81,12 @@ function UpdateTitle () {
             placeholder={sidePanelItem.title}
             defaultValue={sidePanelItem.title}
           />
-          <IconButton type='submit'>
-            <EditIcon />
-            </IconButton>
-          </div>
+         <button className=' rounded-full transition-colors ease-in-out duration-100 hover:bg-slate-800 m-0 flex justify-center w-9 p-2'  type='submit'>
+                <EditIcon className='m-auto'  />
+                </button>
+                </div>
 </form>
+</>
 )}
 
 

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link, NavLink  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/png/checkmark.png";
 import { useDrawer } from "../../../store/todoState";
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import MicrowaveIcon from '@mui/icons-material/Microwave';
-import { IconButton , Button } from "@mui/material";
 import SidePanel from "./TodoUpdate/TodoUpdatePanel";
 import CustomCategories from "./CustomCategories";
 
@@ -98,9 +96,9 @@ function ControlPanelItem() {
   const [Controller , setController] = useState(true)
   return (
     <>
-    <div className="flex justify-around border-[#2d5d8533] border bg-[#00000042]">
-      <div className={`${Controller && "bg-[#3131313a]"} rounded `}><Button size="large" onClick={() => setController(true)}><DensitySmallIcon/></Button></div>
-      <div className={`${!Controller && "bg-[#3131313a]"} rounded "}`} ><Button color='primary' size="large" onClick={() => setController(false)}><MicrowaveIcon/></Button></div>
+    <div className="flex justify-around align border-[#2d5d8533] border bg-[#00000042]">
+      <button className={`drawer-button ${Controller && "bg-slate-700"}`} onClick={() => setController(true)}><DensitySmallIcon/></button>
+      <button className={`drawer-button ${!Controller && "bg-slate-700"}`} onClick={() => setController(false)}><MicrowaveIcon/></button>
     </div>
     <div>
     {Controller ? <CustomCategories/> : <SidePanel />}

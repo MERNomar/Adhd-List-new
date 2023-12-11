@@ -1,7 +1,4 @@
-import { Box, List , Typography , ListItem} from "@mui/material";
 import TodoItem from "./TodoItem";
-import { TransitionGroup } from 'react-transition-group';
-import Collapse from '@mui/material/Collapse';
 import { useStore } from "../../../store/todoState";
 
 
@@ -16,20 +13,12 @@ export default function AllTodos({ category }) {
  
     return (
       <>
-        <Box
-          sx={{
-            width: "100%",
-          }}
-        >
-            <List>
-            <TransitionGroup>  
+        <ol>
               {/* This will check if there is not todos */}
             {arrayFilter.length === 0 ?
-            <Collapse><ListItem><Typography  variant="h3">Add {category} Todos Now ! </Typography></ListItem></Collapse> :
-             categoryFilter.map((todo) => { return <Collapse key={todo._id}><TodoItem items={todo} /></Collapse>})  }
-            </TransitionGroup>
-            </List>
-        </Box>
+            <p >Add {category} Todos Now ! </p> :
+             categoryFilter.map((todo) => { return<TodoItem key={todo._id} items={todo} />})  }
+             </ol>
       </>
     );
   }
