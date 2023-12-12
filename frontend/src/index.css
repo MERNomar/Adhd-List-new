@@ -23,6 +23,9 @@
     .drawer-button{
       @apply  m-auto p-1 pb-2 px-6 hover:bg-slate-700 transition-colors ease-in-out duration-100 rounded-lg
     }
+    .li-item{
+      @apply  flex justify-between border-b-[1px] transition-all relative  duration-200  ease-in-out  h-16 m-1 cursor-pointer bg-[#22252c] hover:bg-[#252830] border-b-[#ffffff48]
+    }
   }
 
 .active {
