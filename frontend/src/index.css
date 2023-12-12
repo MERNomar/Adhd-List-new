@@ -60,4 +60,23 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.ele {
+  animation: 0.5s fadeIn;
+  animation-fill-mode: forwards;
+  position: relative;
+  left: 0;
+  visibility: visible;
+}
 
+.ele:hover {
+  background-color: #123;
+}
+
+@keyframes fadeIn {
+  100% {
+    background-color: #0080003d;
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+  }
+}

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import {setCompleted} from "../../../myAPIS"
 import { useStore } from "../../../store/todoState";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import { useUser } from "../../../store/authState";
 
 
 export default function TodoItems({items}) {
@@ -8,7 +11,9 @@ export default function TodoItems({items}) {
   const [completedState , setCompletedState] = useState(completed)
   const setSidePanelItem = useStore(store => store.setSidePanelItem)
   const sidePanelItem = useStore(store => store.sidePanelItem)
-  
+  const {token} = useUser(user => user.user)
+
+
   const handlePanelItem = () => {
     setSidePanelItem(items)
   }   
@@ -17,15 +22,20 @@ export default function TodoItems({items}) {
     return _id === sidePanelItem._id
   }
   const handleClick = (e) => {
+    e.stopPropagation();
     setCompletedState(true)
-    setCompleted (_id)
   }   
   // global state 
   //----
   return (
-    <li className="flex justify-between border-b-[1px] border-b-[#ffffff48] bg-[#242526] h-10 m-1 " onClick={() => handlePanelItem() } >
-        <div className="ml-2">{title}</div>
-        <input className="mr-2" type="checkbox" checked={completed} onChange={() => handleClick()}  />
+    <li className={`flex justify-between border-b-[1px] transition-all relative  duration-200  ease-in-out ${completedState ? "border-b-green-500  border-b-2 ele" : "border-b-[#ffffff48]"}
+      ${checkSidePanel() ? "bg-[#1c1e24] border-b-blue-500 border-b-4 shadow-sm shadow-transparent "  : "bg-[#22252c] hover:bg-[#252830]"}
+    h-16 m-1 cursor-pointer  transition-colors duration-100 ease-in-out`} onClick={() => handlePanelItem() } >
+        <div className="m-auto ml-2">{title}</div>
+        <div
+        onClick={(e) => handleClick(e)}
+         className="my-auto mr-5 text-3xl transition-all duration-200 hover:text-4xl hover:text-green-300"
+         >{completedState ? <CheckCircleOutlineIcon fontSize="inherit"  className="text-5xl text-green-400 font "/> : <RadioButtonUncheckedIcon  fontSize="inherit" />  }</div>
     </li>
   );
 }
