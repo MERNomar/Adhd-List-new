@@ -1,9 +1,9 @@
 import RoundPlus from "@mui/icons-material/AddCircleOutlined";
-import { useStore } from "../../../../store/todoState";
+import { useDrawer } from "../../../../store/todoState";
 
 export default function AddSteps() {
-  const sidePanelItem = useStore((state) => state.sidePanelItem);
-  const setSidePanelItem = useStore((state) => state.setSidePanelItem);
+  const sidePanelItem = useDrawer((state) => state.sidePanelItem);
+  const setSidePanelItem = useDrawer((state) => state.setSidePanelItem);
 
   // update the global state and send api request to update the item
   const handleNewStep = (event) => {
@@ -39,7 +39,7 @@ export default function AddSteps() {
             placeholder={"Keep it simple!"}
           />
           <button
-            className="flex justify-center p-2 m-0 transition-colors duration-100 ease-in-out rounded-full  hover:bg-slate-800"
+            className="flex justify-center p-2 m-0 transition-colors duration-100 ease-in-out rounded-full hover:bg-slate-800"
             type="submit"
           >
             <RoundPlus className="" />

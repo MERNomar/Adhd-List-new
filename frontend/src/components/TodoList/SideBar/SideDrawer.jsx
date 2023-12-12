@@ -9,7 +9,6 @@ import CustomCategories from "./CustomCategories";
 
 export default function SideNavigationUserContacts() {
   const isSideNavOpen = useDrawer((nav) => nav.isSideNavOpen);
-  const setIsSideNavOpen = useDrawer((nav) => nav.setIsSideNavOpen);
 
   return (
     <>
@@ -50,24 +49,25 @@ export default function SideNavigationUserContacts() {
 }
 
 function ControlPanelItem() {
-  const [Controller, setController] = useState(true);
+  const sidePanelTab = useDrawer((item) => item.sidePanelTab);
+  const SetSidePanelTab = useDrawer((item) => item.SetSidePanelTab);
   return (
     <>
       <div className="flex justify-around align border-[#2d5d8533] border bg-[#00000042]">
         <button
-          className={`drawer-button ${Controller && "bg-slate-700"}`}
-          onClick={() => setController(true)}
+          className={`drawer-button ${sidePanelTab && "bg-slate-700"}`}
+          onClick={() => SetSidePanelTab(true)}
         >
           <DensitySmallIcon />
         </button>
         <button
-          className={`drawer-button ${!Controller && "bg-slate-700"}`}
-          onClick={() => setController(false)}
+          className={`drawer-button ${!sidePanelTab && "bg-slate-700"}`}
+          onClick={() => SetSidePanelTab(false)}
         >
           <MicrowaveIcon />
         </button>
       </div>
-      <div>{Controller ? <CustomCategories /> : <SidePanel />}</div>
+      <div>{sidePanelTab ? <CustomCategories /> : <SidePanel />}</div>
     </>
   );
 }

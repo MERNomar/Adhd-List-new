@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { setCompleted } from "../../../myAPIS";
-import { useStore } from "../../../store/todoState";
+import { useDrawer, useStore } from "../../../store/todoState";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { useUser } from "../../../store/authState";
@@ -8,12 +8,15 @@ import { useUser } from "../../../store/authState";
 export default function TodoItems({ items }) {
   const { _id, title, completed, time, steps } = items;
   const [completedState, setCompletedState] = useState(completed);
-  const setSidePanelItem = useStore((store) => store.setSidePanelItem);
-  const sidePanelItem = useStore((store) => store.sidePanelItem);
+  const setSidePanelItem = useDrawer((store) => store.setSidePanelItem);
+  const sidePanelItem = useDrawer((store) => store.sidePanelItem);
+  const setIsSideNavOpen = useDrawer((store) => store.setIsSideNavOpen);
+
   const { token } = useUser((user) => user.user);
 
   const handlePanelItem = () => {
     setSidePanelItem(items);
+    setIsSideNavOpen(true);
   };
 
   const checkSidePanel = () => {

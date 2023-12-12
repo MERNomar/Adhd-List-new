@@ -1,19 +1,16 @@
+import { useDrawer } from "../../../../store/todoState";
 
-import { useStore } from "../../../../store/todoState"
-
-
-
-export default function MapSteps(){
-    const sidePanelItem = useStore(state => state.sidePanelItem)
-    const setSidePanelItem = useStore(state => state.updateSidePanel)
-    if (sidePanelItem.steps.length === 0)
-      return (
-        <div htmlFor="step" className=" text-base  text-blue-100 ">
-          Add Steps !
-        </div>
-      );
+export default function MapSteps() {
+  const sidePanelItem = useDrawer((state) => state.sidePanelItem);
+  const setSidePanelItem = useDrawer((state) => state.updateSidePanel);
+  if (sidePanelItem.steps.length === 0)
     return (
-      <>
+      <div htmlFor="step" className="text-base text-blue-100 ">
+        Add Steps !
+      </div>
+    );
+  return (
+    <>
       <ol className="h-72 overflow-auto  text-center rounded mx-[5px] ">
         {sidePanelItem.steps.map((item) => {
           return (
@@ -26,7 +23,7 @@ export default function MapSteps(){
             </li>
           );
         })}
-        </ol>
-      </>
-    );
-  }
+      </ol>
+    </>
+  );
+}
