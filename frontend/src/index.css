@@ -80,13 +80,13 @@
 
 @keyframes fadeIn {
   50% {
-    display: none;
 
   }
   100% {
     color: #064fe200;
     height: 0px;
     border: 0;
+    display: none;
     background-color: #0080003d;
     visibility: hidden;
     opacity: 0;
@@ -94,31 +94,3 @@
   }
 }
 
-
-.hide-section {
-  animation: 400ms shrink-animation;
-  animation-fill-mode: forwards;
-  position: relative;
-  left: 0;
-  visibility: visible;
-}
-
-.hide-section:hover {
-  background-color: #123;
-}
-
-@keyframes shrink-animation {
- 
-  25% {
-    display: none;
-    
-
-
-  }
-  100% {
-    display: none;
-   
-
-
-  }
-}
