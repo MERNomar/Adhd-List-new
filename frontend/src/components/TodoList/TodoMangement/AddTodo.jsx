@@ -21,11 +21,11 @@ export default function AddTodo({ category, mutate }) {
 
   return (
     <form
-      className="flex h-16 w-[97%] m-auto bg-[#15171c] rounded px-2"
+      className="  flex h-16 w-[97%] m-auto bg-[#15171c] rounded px-2"
       onSubmit={(e) => handleSubmit(e)}
     >
       <input
-        className="p-1 mr-[7px] my-auto text-xl w-[98%] focus:border-blue-900 px-2  focus:border-2 outline-none bg-black border-[1px] border-stone-500  h-12"
+        className=" z-40 p-1 mr-[7px] my-auto text-xl w-[98%] focus:border-blue-900 px-2  focus:border-2 outline-none bg-black border-[1px] border-stone-500  h-12"
         placeholder="Add Todo"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -35,9 +35,14 @@ export default function AddTodo({ category, mutate }) {
           className="p-1 my-auto text-blue-700 transition-colors ease-in-out rounded hover:duration-100 active:duration-0 active:bg-slate-700 hover:bg-slate-800"
           type="submit"
         >
-          <AddIcon color="inherit" fontSize="large" />
+          <AddIcon
+            className="hover:animate-spin"
+            color="inherit"
+            fontSize="large"
+          />
         </button>
       </div>
+      <div className="absolute h-[62px] w-[60%] border-b-2 z-0 border-b-blue-500 animate-pulse "></div>
     </form>
   );
 }

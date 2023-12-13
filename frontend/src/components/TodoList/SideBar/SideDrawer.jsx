@@ -28,6 +28,7 @@ export default function SideNavigationUserContacts() {
             to="/"
             className="flex  items-center gap-4  h-[60px] border-b-[1px]  border-[#ffffff3d] bg-[#23272f]"
           >
+            <div className="h-60"></div>
             <Link to={"/"}>
               <img
                 className="w-11  ml-3  border-[#ffffff0e] border-r-2 border-solid pr-3"
@@ -53,7 +54,7 @@ function ControlPanelItem() {
   const SetSidePanelTab = useDrawer((item) => item.SetSidePanelTab);
   return (
     <>
-      <div className="flex justify-around align border-[#2d5d8533] border bg-[#00000042]">
+      <div className="flex justify-around align border-[#2d5d8533] border bg-[#00000042] ">
         <button
           className={`drawer-button ${sidePanelTab && "bg-slate-700"}`}
           onClick={() => SetSidePanelTab(true)}
@@ -67,7 +68,9 @@ function ControlPanelItem() {
           <MicrowaveIcon />
         </button>
       </div>
-      <div>{sidePanelTab ? <CustomCategories /> : <SidePanel />}</div>
+      <div className="transition-all ease-in-out">
+        {sidePanelTab ? <CustomCategories /> : <SidePanel />}
+      </div>
     </>
   );
 }

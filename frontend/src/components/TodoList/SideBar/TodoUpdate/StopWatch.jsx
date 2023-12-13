@@ -1,14 +1,15 @@
 // needed libraries
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStopwatch } from "react-timer-hook";
 // Apis and global states
 import { useDrawer } from "../../../../store/todoState";
 import Switch from "@mui/material/Switch";
+import Arrow from "../../../assets/svg/Arrow";
 
 export default function StopWatch() {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const setSidePanelItem = useDrawer((state) => state.updateSidePanel);
-  const days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+  const [hideState, setHideState] = useState(false);
   const timeUpdate = sidePanelItem.worked_time;
   const today = new Date();
   const currentDate = new Intl.DateTimeFormat("en-us", { dateStyle: "long" });
@@ -41,11 +42,18 @@ export default function StopWatch() {
       pause();
     }
   }
+
   return (
     <>
       <hr className="border-[#b2ddee41] my-4"></hr>
-      <p>Track Time</p>
-      <div className="ml-4">
+      <div
+        className="select-none dropdown-items"
+        onClick={() => setHideState(!hideState)}
+      >
+        <Arrow state={hideState} />
+        Track Time
+      </div>
+      <div className={`${hideState ? " hidden" : " "} ml-4`}>
         <div
           className={`flex text-[30px] transition-colors  duration-200 mt-4  ${
             isRunning && "text-[#89c0ed]	"

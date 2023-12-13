@@ -26,6 +26,9 @@
     .li-item{
       @apply  flex justify-between border-b-[1px] transition-all relative  duration-200  ease-in-out  h-16 m-1 cursor-pointer bg-[#22252c] hover:bg-[#252830] border-b-[#ffffff48]
     }
+    .dropdown-items {
+      @apply  cursor-pointer  p-1 hover:bg-slate-600 transition-colors  bg-[#00000050] w-full 
+    }
   }
 
 .active {
@@ -76,10 +79,46 @@
 }
 
 @keyframes fadeIn {
+  50% {
+    display: none;
+
+  }
   100% {
+    color: #064fe200;
+    height: 0px;
+    border: 0;
     background-color: #0080003d;
     visibility: hidden;
     opacity: 0;
+
+  }
+}
+
+
+.hide-section {
+  animation: 400ms shrink-animation;
+  animation-fill-mode: forwards;
+  position: relative;
+  left: 0;
+  visibility: visible;
+}
+
+.hide-section:hover {
+  background-color: #123;
+}
+
+@keyframes shrink-animation {
+ 
+  25% {
     display: none;
+    
+
+
+  }
+  100% {
+    display: none;
+   
+
+
   }
 }

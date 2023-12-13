@@ -11,11 +11,13 @@ export default function TodoItems({ items }) {
   const setSidePanelItem = useDrawer((store) => store.setSidePanelItem);
   const sidePanelItem = useDrawer((store) => store.sidePanelItem);
   const setIsSideNavOpen = useDrawer((store) => store.setIsSideNavOpen);
+  const SetSidePanelTab = useDrawer((store) => store.SetSidePanelTab);
 
   const { token } = useUser((user) => user.user);
 
   const handlePanelItem = () => {
     setSidePanelItem(items);
+    SetSidePanelTab(false);
     setIsSideNavOpen(true);
   };
 
@@ -25,6 +27,7 @@ export default function TodoItems({ items }) {
   const handleClick = (e) => {
     e.stopPropagation();
     setCompletedState(true);
+    setCompleted(_id, token);
   };
   // global state
   //----
