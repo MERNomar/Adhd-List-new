@@ -28,6 +28,9 @@ export default function SidePanel() {
   return (
     <>
       <div className="mt-2">
+        <div className="h-8 m-2 overflow-hidden font-bold text-center text-blue-300 whitespace-nowrap text-ellipsis">
+          {sidePanelItem.title}
+        </div>
         {/* This one is hard to figure out right ? :D */}
         <UpdateTitle />
         {/* handle the stop watch and all the timer stuff */}
