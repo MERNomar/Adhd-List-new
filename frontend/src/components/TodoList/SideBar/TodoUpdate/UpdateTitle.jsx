@@ -1,6 +1,4 @@
-// needed libraries
-import { useState } from "react";
-// Apis and global states
+import { useState, useEffect } from "react";
 import { useDrawer } from "../../../../store/todoState";
 import EditIcon from "@mui/icons-material/Edit";
 import Arrow from "../../../assets/svg/Arrow";
@@ -8,7 +6,16 @@ import Arrow from "../../../assets/svg/Arrow";
 export default function UpdateTitle() {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const setSidePanelItem = useDrawer((state) => state.setSidePanelItem);
-  const [hideState, setHideState] = useState(false);
+
+  const [hideState, setHideState] = useState(() => {
+    const storedValue = localStorage.getItem("HIDE_TITLE");
+    return storedValue ? JSON.parse(storedValue) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("HIDE_TITLE", JSON.stringify(hideState));
+  }, [hideState]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -30,10 +37,10 @@ export default function UpdateTitle() {
           handleSubmit(e);
         }}
       >
-        <div className="   flex justify-center rounded-md py-[1px] px-1 bg-[#00000069]">
+        <div className="flex justify-center rounded-md py-[1px] px-1 bg-[#00000069]">
           <input
             disabled={!sidePanelItem}
-            className="bg-black border-black focus:border-blue-500  p-[10px] rounded shadow-sm  w-[220px] click:transition-colors	duration-300	  outline-[0]  border-[#2941913f] border-[1px] text-base  border-solid h-8  m-1 : "
+            className="bg-black border-black focus:border-blue-500 p-[10px] rounded shadow-sm w-[220px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px] text-base border-solid h-8 m-1 : "
             type="text"
             name="title"
             id="title"

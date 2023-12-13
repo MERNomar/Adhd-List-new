@@ -4,7 +4,15 @@ import RoundPlus from "@mui/icons-material/AddCircleOutline";
 import Arrow from "../../../assets/svg/Arrow";
 
 export default function Steps() {
-  const [hideState, setHideState] = useState();
+  const sidePanelItem = useDrawer((state) => state.sidePanelItem);
+  const [hideState, setHideState] = useState(() => {
+    const storedValue = localStorage.getItem("HIDE_STEPS");
+    return storedValue ? JSON.parse(storedValue) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("HIDE_STEPS", JSON.stringify(hideState));
+  }, [hideState]);
 
   return (
     <>

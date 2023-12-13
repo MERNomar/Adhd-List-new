@@ -9,10 +9,17 @@ import Arrow from "../../../assets/svg/Arrow";
 export default function StopWatch() {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const setSidePanelItem = useDrawer((state) => state.updateSidePanel);
-  const [hideState, setHideState] = useState(false);
   const timeUpdate = sidePanelItem.worked_time;
   const today = new Date();
   const currentDate = new Intl.DateTimeFormat("en-us", { dateStyle: "long" });
+  const [hideState, setHideState] = useState(() => {
+    const storedValue = localStorage.getItem("HIDE_WATCH");
+    return storedValue ? JSON.parse(storedValue) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("HIDE_WATCH", JSON.stringify(hideState));
+  }, [hideState]);
 
   const { minutes, hours, pause, reset, isRunning } = useStopwatch({
     autoStart: false,
