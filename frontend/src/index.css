@@ -27,7 +27,7 @@
       @apply  flex justify-between border-b-[1px] transition-all relative  duration-200  ease-in-out  h-16 m-1 cursor-pointer bg-[#22252c] hover:bg-[#252830] border-b-[#ffffff48]
     }
     .dropdown-items {
-      @apply  cursor-pointer  p-1 hover:bg-slate-600 transition-colors  bg-[#00000050] w-full 
+      @apply  cursor-pointer  p-1 hover:bg-slate-600   bg-[#00000050] w-full  transition-none
     }
   }
 

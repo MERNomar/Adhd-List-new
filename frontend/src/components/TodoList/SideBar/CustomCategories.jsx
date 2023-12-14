@@ -5,44 +5,74 @@ import HomeSVG from "@mui/icons-material/HomeOutlined";
 import ImportantSVG from "@mui/icons-material/StarPurple500Outlined";
 import SadFaceSVG from "@mui/icons-material/SentimentDissatisfiedOutlined";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Arrow from "../../assets/svg/Arrow";
+import { useStore } from "../../../store/todoState";
 
 export default function CustomCategories() {
-  // [hideWork , setHideWork] = useState()
-  // [hideWork , setHideWork] = useState()
-  // [hideWork , setHideWork] = useState()
   const navItemsOpj = [
-    { title: "My Day", icon: <MyDaySVG />, link: "/todos/my-day" },
-    { title: "Work", icon: <WorkSVG />, link: "/todos/work" },
-    { title: "Important", icon: <ImportantSVG />, link: "/todos/important" },
+    {
+      id: crypto.randomUUID(),
+      icon: <MyDaySVG />,
+      link: "my-day",
+      children: [
+        { id: crypto.randomUUID(), title: "child1" },
+        { id: crypto.randomUUID(), title: "child2" },
+      ],
+    },
+    {
+      id: crypto.randomUUID(),
+      icon: <WorkSVG />,
+      link: "work",
+      children: [
+        { id: crypto.randomUUID(), title: "child3" },
+        { id: crypto.randomUUID(), title: "child4" },
+      ],
+    },
+    {
+      id: crypto.randomUUID(),
+      icon: <ImportantSVG />,
+      link: "important",
+      children: [
+        { id: crypto.randomUUID(), title: "child5" },
+        { id: crypto.randomUUID(), title: "child6" },
+      ],
+    },
   ];
 
   return (
     <nav
       aria-label="side navigation"
-      className="flex-1 divide-y divide-slate-100 overflow-auto border-r-[1px]  border-[#2d888011] bg-[#23272f] "
+      className="flex-1 divide-slate-100 overflow-auto border-r-[1px]  border-[#2d888011] bg-[#23272f] "
     >
       <div>
-        <ul className="flex flex-col flex-1 gap-1 py-3 ">
+        <ul className="flex justify-center flex-1 gap-1 py-3 ">
           {navItemsOpj.map((navItem) => {
-            return (
-              <li className="px-3">
-                <NavLink
-                  to={navItem.link}
-                  className="flex items-center gap-3 rounded p-3 text-gray-100 transition-colors  hover:text-[#0084ff]  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
-                >
-                  <div className="flex items-center self-center w-6">
-                    {navItem.icon}
-                  </div>
-                  <div className="flex flex-col items-start justify-center flex-1 w-full gap-0 overflow-hidden text-sm truncate">
-                    {navItem.title}
-                  </div>
-                </NavLink>
-              </li>
-            );
+            return <NavItem key={navItem.id} navItem={navItem} />;
           })}
         </ul>
       </div>
+      <dir className="w-[90%] h-[1px] m-auto bg-[#ffffff50]"></dir>
+      <ul></ul>
     </nav>
+  );
+}
+
+function NavItem({ navItem }) {
+  const currentPage = useStore((store) => store.currentPage);
+  const isCurrentPage = currentPage === navItem.link;
+  return (
+    <>
+      <li className="px-3">
+        <NavLink
+          to={navItem.link}
+          className="flex items-center gap-3 rounded p-3 text-gray-100 transition-colors  hover:text-[#0084ff]  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
+        >
+          <div className="flex items-center self-center w-6">
+            {navItem.icon}
+          </div>
+        </NavLink>
+      </li>
+    </>
   );
 }

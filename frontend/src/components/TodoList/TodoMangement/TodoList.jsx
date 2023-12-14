@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { getTodos, postTodo } from "../../../myAPIS";
+import { useEffect } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { postTodo } from "../../../myAPIS";
 import AddTodo from "./AddTodo";
 import MapTodos from "./MapTodos";
 import { useStore } from "../../../store/todoState";
@@ -11,8 +11,13 @@ export default function TodoList({ category, header }) {
   document.title = `AdhdList | ${header}`;
   const queryClient = useQueryClient();
 
-  const data = useStore((store) => store.allTasks);
+  const setCurrentPage = useStore((store) => store.setCurrentPage);
 
+  useEffect(() => {
+    setCurrentPage(category);
+  }, [category]);
+
+  const data = useStore((store) => store.allTasks);
   const { mutate } = useMutation({
     mutationFn: (todo) => postTodo(todo, token),
     onSuccess: () => queryClient.invalidateQueries(["todos"]),

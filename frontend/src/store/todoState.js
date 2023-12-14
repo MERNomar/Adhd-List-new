@@ -4,6 +4,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 export const useStore = create((set) => ({
   allTasks: false,
   setAllTasks: (todo) => set({ allTasks: todo }),
+  currentPage: "",
+  setCurrentPage: (currentPage) => set({ currentPage: currentPage }),
 }));
 
 export const useDrawer = create(
