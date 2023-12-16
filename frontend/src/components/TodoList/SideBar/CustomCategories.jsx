@@ -10,33 +10,36 @@ import Arrow from "../../assets/svg/Arrow";
 import { useStore } from "../../../store/todoState";
 
 export default function CustomCategories() {
+  const currentPage = useStore((store) => store.currentPage);
+
+  const navRoot = [
+    { id: crypto.randomUUID(), title: "massager clone", category: "work" },
+    { id: crypto.randomUUID(), title: "portfolio Project", category: "work" },
+    { id: crypto.randomUUID(), title: "react todo project", category: "work" },
+    { id: crypto.randomUUID(), title: "reactblog", category: "work" },
+    { id: crypto.randomUUID(), title: "take a shower", category: "my-day" },
+    { id: crypto.randomUUID(), title: "start to work", category: "my-day" },
+  ];
+
+  const filterRoot = navRoot.filter((item) => {
+    return item.category === currentPage;
+  });
+
   const navItemsOpj = [
     {
       id: crypto.randomUUID(),
       icon: <MyDaySVG />,
       link: "my-day",
-      children: [
-        { id: crypto.randomUUID(), title: "child1" },
-        { id: crypto.randomUUID(), title: "child2" },
-      ],
     },
     {
       id: crypto.randomUUID(),
       icon: <WorkSVG />,
       link: "work",
-      children: [
-        { id: crypto.randomUUID(), title: "child3" },
-        { id: crypto.randomUUID(), title: "child4" },
-      ],
     },
     {
       id: crypto.randomUUID(),
       icon: <ImportantSVG />,
       link: "important",
-      children: [
-        { id: crypto.randomUUID(), title: "child5" },
-        { id: crypto.randomUUID(), title: "child6" },
-      ],
     },
   ];
 
@@ -53,7 +56,20 @@ export default function CustomCategories() {
         </ul>
       </div>
       <dir className="w-[90%] h-[1px] m-auto bg-[#ffffff50]"></dir>
-      <ul></ul>
+      <ul className="flex flex-col justify-center flex-1 gap-1 py-3 ">
+        {filterRoot.map((item) => {
+          return (
+            <li className="px-3 text-base">
+              <NavLink
+                to={item.id}
+                className="flex items-center gap-3 rounded p-3 text-gray-100  hover:bg-slate-700  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
+              >
+                {item.title}
+              </NavLink>
+            </li>
+          );
+        })}
+      </ul>
     </nav>
   );
 }
