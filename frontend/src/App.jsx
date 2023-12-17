@@ -39,20 +39,8 @@ export default function Router() {
       element: user ? <AdhdRoot /> : <Navigate to={"/auth/login"} />,
       children: [
         {
-          path: "my-day",
-          element: <TodoList header="My day" category="my-day" />,
-        },
-        {
-          path: "work",
-          element: <TodoList header="Work" category="work" />,
-        },
-        {
-          path: "important",
-          element: <TodoList header="Important !" category="important" />,
-        },
-        {
-          path: "",
-          element: <TodoList header="Work" category="all" />,
+          path: ":title",
+          element: <TodoList title="test" category="my-day" />,
         },
       ],
     },
