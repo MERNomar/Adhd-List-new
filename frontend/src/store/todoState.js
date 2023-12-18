@@ -6,6 +6,8 @@ export const useStore = create((set) => ({
   setAllTasks: (todo) => set({ allTasks: todo }),
   currentPage: "",
   setCurrentPage: (currentPage) => set({ currentPage: currentPage }),
+  currentRoot: "",
+  setCurrentRoot: (currentPage) => set({ currentRoot: currentPage }),
 }));
 
 export const useDrawer = create(
