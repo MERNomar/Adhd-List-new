@@ -5,7 +5,21 @@ export const getTodos = async (token) => {
     return await ky
       .get("/api/todos/get-all", {
         headers: {
-          authorization: `token ${token}`,
+          authorization: `bearer ${token}`,
+        },
+      })
+      .json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getRootCategories = async (token) => {
+  try {
+    return await ky
+      .get("/api/category/get-category-root", {
+        headers: {
+          authorization: `bearer ${token}`,
         },
       })
       .json();
@@ -20,7 +34,7 @@ export const postTodo = async (todo, token) => {
     return await ky.post(`/api/todos/post`, {
       json: todo,
       headers: {
-        authorization: `token ${token}`,
+        authorization: `bearer ${token}`,
       },
     });
   } catch (err) {
@@ -34,7 +48,7 @@ export const setCompleted = async (id, token) => {
       .put(`/api/todos/update-todo/${id}`, {
         json: { completed: true },
         headers: {
-          authorization: `token ${token}`,
+          authorization: `bearer ${token}`,
         },
       })
       .json();
@@ -48,7 +62,7 @@ export const getTodoItem = async (id) => {
     return await ky
       .get(`/api/todos/get-todo/${id}`, {
         headers: {
-          authorization: `token ${token}`,
+          authorization: `bearer ${token}`,
         },
       })
       .json();
