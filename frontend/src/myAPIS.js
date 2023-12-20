@@ -14,20 +14,6 @@ export const getTodos = async (token) => {
   }
 };
 
-export const getRootCategories = async (token) => {
-  try {
-    return await ky
-      .get("/api/category/get-category-root", {
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      })
-      .json();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const postTodo = async (todo, token) => {
   console.log(todo);
   try {
@@ -78,6 +64,34 @@ export const putUpdateTodo = async ({ id, sidePanelItem }) => {
         json: sidePanelItem,
       })
       .json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getRootCategories = async (token) => {
+  try {
+    return await ky
+      .get("/api/category/get-category-root", {
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+      })
+      .json();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const postRootCategories = async (item, token) => {
+  console.log(item);
+  try {
+    return await ky.post(`/api/category/post-category-root`, {
+      json: item,
+      headers: {
+        authorization: `bearer ${token}`,
+      },
+    });
   } catch (err) {
     console.log(err);
   }
