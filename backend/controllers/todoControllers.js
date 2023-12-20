@@ -2,7 +2,7 @@ const { Todo } = require("../models/todosModels");
 const mongoose = require("mongoose");
 
 const getTodos = (req, res) => {
-  Todo.find()
+  Todo.find({ user_id: req.user })
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json({ error: err }));
 };

@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const categoryRootSchema = new Schema(
   {
+    user_id: { type: String, required: true },
     title: { type: String, required: true },
     category: { type: String, required: true },
     completed: { type: Boolean, required: true },
