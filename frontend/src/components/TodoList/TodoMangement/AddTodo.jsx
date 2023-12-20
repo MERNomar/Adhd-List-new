@@ -4,9 +4,8 @@ import { useParams } from "react-router-dom";
 import { useUser } from "../../../store/authState";
 
 export default function AddTodo({ category, mutate }) {
-  const user = useUser((user) => user.user);
-  console.log(user);
   const { child: currentRootRoute } = useParams();
+
   const [title, setTitle] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +13,7 @@ export default function AddTodo({ category, mutate }) {
     const todo = {
       title: inputValue,
       category: category ? category : "null",
-      root_category: currentRootRoute,
+      root_category: currentRootRoute ? currentRootRoute : "null",
       completed: false,
       important: false,
       worked_time: 0,
