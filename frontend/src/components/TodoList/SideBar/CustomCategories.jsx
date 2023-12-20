@@ -1,30 +1,15 @@
-import AllTasksSVG from "@mui/icons-material/FactCheckOutlined";
 import MyDaySVG from "@mui/icons-material/WbTwilightOutlined";
 import WorkSVG from "@mui/icons-material/BusinessCenterOutlined";
-import HomeSVG from "@mui/icons-material/HomeOutlined";
 import ImportantSVG from "@mui/icons-material/StarPurple500Outlined";
-import SadFaceSVG from "@mui/icons-material/SentimentDissatisfiedOutlined";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Arrow from "../../assets/svg/Arrow";
 import { useStore } from "../../../store/todoState";
+import EditIcon from "@mui/icons-material/Edit";
+import AddIcon from "@mui/icons-material/Add";
+import { postRootCategories } from "../../../myAPIS";
+import { useUser } from "../../../store/authState";
+import { useParams } from "react-router-dom";
 
 export default function CustomCategories() {
-  const currentPage = useStore((store) => store.currentPage);
-
-  const navRoot = [
-    { id: crypto.randomUUID(), title: "massager clone", category: "work" },
-    { id: crypto.randomUUID(), title: "portfolio Project", category: "work" },
-    { id: crypto.randomUUID(), title: "react todo project", category: "work" },
-    { id: crypto.randomUUID(), title: "reactblog", category: "work" },
-    { id: crypto.randomUUID(), title: "take a shower", category: "my-day" },
-    { id: crypto.randomUUID(), title: "start to work", category: "my-day" },
-  ];
-
-  const filterRoot = navRoot.filter((item) => {
-    return item.category === currentPage;
-  });
-
   const navItemsOpj = [
     {
       id: crypto.randomUUID(),
@@ -49,6 +34,7 @@ export default function CustomCategories() {
       className="flex-1 divide-slate-100 overflow-auto border-r-[1px]  border-[#2d888011] bg-[#23272f] "
     >
       <div>
+        {/* This will map the top icons ( main categories ) */}
         <ul className="flex justify-center flex-1 gap-1 py-3 ">
           {navItemsOpj.map((navItem) => {
             return <NavItem key={navItem.id} navItem={navItem} />;
@@ -56,27 +42,67 @@ export default function CustomCategories() {
         </ul>
       </div>
       <dir className="w-[90%] h-[1px] m-auto bg-[#ffffff50]"></dir>
-      <ul className="flex flex-col justify-center flex-1 gap-1 py-3 ">
+      {/* This will map the root categories like if you picked work this should pick the work root items */}
+      <RootCategory />
+    </nav>
+  );
+}
+
+export function RootCategory() {
+  const currentPage = useStore((store) => store.currentPage);
+  const allSideRoots = useStore((store) => store.allSideRoots);
+  const setCurrentRoot = useStore((store) => store.setCurrentRoot);
+  const currentRoot = useStore((store) => store.currentRoot);
+  const { token } = useUser((user) => user.user);
+  const filterRoot = allSideRoots.filter((item) => {
+    return item.category === currentPage;
+  });
+
+  const { title: category } = useParams();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const title = e.target.title.value;
+    const item = { title, category: category, completed: false };
+    postRootCategories(item, token);
+  };
+
+  return (
+    <>
+      <form onSubmit={(e) => onSubmit(e)} className={`justify-center  mt-1 `}>
+        <div className="flex justify-center rounded-md py-[1px]   bg-[#00000069]">
+          <input
+            className="bg-black border-black focus:border-blue-500 p-[10px] rounded shadow-sm w-[220px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px] text-base border-solid h-8 m-1 : "
+            type="text"
+            name="title"
+            id="title"
+          />
+          <button
+            className="flex justify-center p-2 m-0 transition-colors duration-100 ease-in-out rounded-full hover:bg-slate-800 w-9"
+            type="submit"
+          >
+            <AddIcon className="m-auto text-blue-500" />
+          </button>
+        </div>
+      </form>{" "}
+      <ul className="flex flex-col justify-center flex-1 gap-1 py-2 font-medium">
         {filterRoot.map((item) => {
           return (
-            <li className="px-3 text-base">
+            <li className="px-3 text-base transition-colors" key={item._id}>
               <NavLink
-                to={item.id}
-                className="flex items-center gap-3 rounded p-3 text-gray-100  hover:bg-slate-700  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
+                to={currentPage + "/" + item._id}
+                className="flex items-center gap-3 rounded p-3 text-gray-100 transition-colors  hover:text-[#0084ff]  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
               >
-                {item.title}
+                <div> {item.title}</div>
               </NavLink>
             </li>
           );
         })}
       </ul>
-    </nav>
+    </>
   );
 }
 
 function NavItem({ navItem }) {
-  const currentPage = useStore((store) => store.currentPage);
-  const isCurrentPage = currentPage === navItem.link;
   return (
     <>
       <li className="px-3">
