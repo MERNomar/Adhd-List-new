@@ -50,26 +50,33 @@ export default function SideNavigationUserContacts() {
 }
 
 function ControlPanelItem() {
+  const sidePanelItem = useDrawer((item) => item.sidePanelItem);
   const sidePanelTab = useDrawer((item) => item.sidePanelTab);
   const SetSidePanelTab = useDrawer((item) => item.SetSidePanelTab);
   return (
     <>
       <div className="flex justify-around align border-[#2d5d8533] border bg-[#00000042] ">
         <button
-          className={`drawer-button ${sidePanelTab && "bg-slate-700"}`}
-          onClick={() => SetSidePanelTab(true)}
+          className={`drawer-button ${!sidePanelTab && "bg-slate-700"}`}
+          onClick={() => SetSidePanelTab(false)}
         >
           <DensitySmallIcon />
         </button>
         <button
-          className={`drawer-button ${!sidePanelTab && "bg-slate-700"}`}
-          onClick={() => SetSidePanelTab(false)}
+          disabled={!sidePanelItem}
+          className={`${
+            !sidePanelItem?.steps && "text-gray-600 hover:bg-[#ffffff00]"
+          } drawer-button ${sidePanelTab && "bg-slate-700"}`}
+          onClick={() => {
+            if (!sidePanelItem?.steps) return;
+            SetSidePanelTab(true);
+          }}
         >
           <MicrowaveIcon />
         </button>
       </div>
       <div className="transition-all ease-in-out">
-        {sidePanelTab ? <CustomCategories /> : <SidePanel />}
+        {!sidePanelTab ? <CustomCategories /> : <SidePanel />}
       </div>
     </>
   );

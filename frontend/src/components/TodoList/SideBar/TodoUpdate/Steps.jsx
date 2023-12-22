@@ -34,7 +34,7 @@ export default function Steps() {
 function MapSteps() {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const setSidePanelItem = useDrawer((state) => state.updateSidePanel);
-  if (sidePanelItem.steps.length === 0)
+  if (sidePanelItem.steps.length === 0) {
     return (
       <>
         <div htmlFor="step" className="text-base text-blue-100 ">
@@ -42,6 +42,7 @@ function MapSteps() {
         </div>
       </>
     );
+  }
   return (
     <>
       <ol className="h-52 overflow-auto  text-center  mx-[5px] ">

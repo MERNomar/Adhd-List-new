@@ -4,10 +4,12 @@ import { persist, createJSONStorage } from "zustand/middleware";
 export const useStore = create((set) => ({
   allTasks: false,
   setAllTasks: (todo) => set({ allTasks: todo }),
+  allSideRoots: "notItem",
+  setAllSideRoots: (data) => set({ allSideRoots: data }),
   currentPage: "",
   setCurrentPage: (currentPage) => set({ currentPage: currentPage }),
   currentRoot: "",
-  setCurrentRoot: (currentPage) => set({ currentRoot: currentPage }),
+  setCurrentRoot: (currentRoot) => set({ currentRoot: currentRoot }),
 }));
 
 export const useDrawer = create(
@@ -19,7 +21,7 @@ export const useDrawer = create(
       setIsSizeOk: (value) => set({ isSizeOk: value }),
       sidePanelTab: false,
       SetSidePanelTab: (value) => set({ sidePanelTab: value }),
-      sidePanelItem: {},
+      sidePanelItem: null,
       setSidePanelItem: (todo) => set({ sidePanelItem: todo }),
     }),
     {

@@ -11,9 +11,6 @@ export default function App() {
   const setIsSideNavOpen = useDrawer((nav) => nav.setIsSideNavOpen);
   const isSizeOk = useDrawer((nav) => nav.isSizeOk);
   const darkMode = useDarkMode((store) => store.darkMode);
-  const user = useUser((user) => user.user);
-
-  // set all todos and all side roots onMount
 
   return (
     <div className={`${darkMode ? "dark" : "null"}`}>

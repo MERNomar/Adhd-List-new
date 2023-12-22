@@ -2,10 +2,16 @@ import { useState, useEffect } from "react";
 import { useDrawer } from "../../../../store/todoState";
 import EditIcon from "@mui/icons-material/Edit";
 import Arrow from "../../../assets/svg/Arrow";
+import Select from "react-select";
 
 export default function UpdateTitle() {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const setSidePanelItem = useDrawer((state) => state.setSidePanelItem);
+  const options = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
 
   const [hideState, setHideState] = useState(() => {
     const storedValue = localStorage.getItem("HIDE_TITLE");
@@ -32,7 +38,7 @@ export default function UpdateTitle() {
         Update
       </div>
       <form
-        className={`${hideState ? " hidden" : " "} justify-center mt-1 `}
+        className={`${hideState ? " hidden" : " "} justify-center  mt-1 `}
         onSubmit={(e) => {
           handleSubmit(e);
         }}
@@ -54,6 +60,9 @@ export default function UpdateTitle() {
           >
             <EditIcon className="m-auto" />
           </button>
+        </div>
+        <div className="flex justify-around mt-1 text-lg bg-slate-700 w-[90%] m-auto py-1 rounded">
+          <Select options={options} />
         </div>
       </form>
     </>

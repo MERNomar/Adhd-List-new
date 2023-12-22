@@ -57,11 +57,14 @@ export const getTodoItem = async (id) => {
   }
 };
 
-export const putUpdateTodo = async ({ id, sidePanelItem }) => {
+export const putUpdateTodo = async ({ id, token, sidePanelItem }) => {
   try {
     return await ky
       .put(`/api/todos/update-todo/${id}`, {
         json: sidePanelItem,
+        headers: {
+          authorization: `bearer ${token}`,
+        },
       })
       .json();
   } catch (err) {

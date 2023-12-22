@@ -29,12 +29,20 @@
     .dropdown-items {
       @apply  cursor-pointer  p-1 hover:bg-slate-600   bg-[#00000050] w-full  transition-none
     }
+    .active {
+      @apply bg-[#0e10134d] text-[#0077ffd0] hover:bg-[#0e10134d]
+    }
   }
 
-.active {
-    background-color: #0e10134d ;
-    color : rgba(0, 119, 255, 0.815)
-}
+  .active {
+    background-color: #0e10134d;
+  }
+  .active:hover {
+    background-color: #0e10134d;
+    
+  }
+
+
 
 :root {
         background-color: #1a1d23; 

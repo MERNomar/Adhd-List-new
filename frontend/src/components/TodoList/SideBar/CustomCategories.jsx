@@ -64,6 +64,7 @@ export function RootCategory() {
     const title = e.target.title.value;
     const item = { title, category: category, completed: false };
     postRootCategories(item, token);
+    e.target.title.value = "";
   };
 
   return (
@@ -74,6 +75,7 @@ export function RootCategory() {
             className="bg-black border-black focus:border-blue-500 p-[10px] rounded shadow-sm w-[220px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px] text-base border-solid h-8 m-1 : "
             type="text"
             name="title"
+            placeholder="Add project"
             id="title"
           />
           <button

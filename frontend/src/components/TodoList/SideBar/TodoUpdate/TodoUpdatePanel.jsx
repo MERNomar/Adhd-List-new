@@ -6,22 +6,29 @@ import { putUpdateTodo } from "../../../../myAPIS";
 import Steps from "./Steps";
 import StopWatch from "./StopWatch";
 import UpdateTitle from "./UpdateTitle";
+import { useUser } from "../../../../store/authState";
 
 export default function SidePanel() {
   const queryClient = useQueryClient();
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
+  const { token } = useUser((state) => state.user);
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: putUpdateTodo,
+    mutationFn: () => putUpdateTodo(),
     onSuccess: () => queryClient.invalidateQueries(["todos"]),
   });
 
   useEffect(() => {
     if (!sidePanelItem) return;
-    mutate({
+    putUpdateTodo({
       id: sidePanelItem._id,
+      token,
       sidePanelItem: { steps: sidePanelItem.steps, title: sidePanelItem.title },
     });
+    // mutate({
+    //   id: sidePanelItem._id,
+    //   sidePanelItem: { steps: sidePanelItem.steps, title: sidePanelItem.title },
+    // });
   }, [sidePanelItem]);
   //* ------------------------ THE END OF IT -----------------
 

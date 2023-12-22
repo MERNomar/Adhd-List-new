@@ -4,7 +4,6 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "./index.css";
 import LandingRoot from "./components/landingPage/LandingRoot.jsx";
@@ -13,16 +12,13 @@ import LoginPage from "./components/authComponents/LoginPage.jsx";
 import { useUser } from "./store/authState.js";
 import AdhdRoot from "./components/TodoList/AdhdRoot.jsx";
 import TodoList from "./components/TodoList/TodoMangement/TodoList.jsx";
-import CustomCategories from "./components/TodoList/SideBar/CustomCategories.jsx";
-import RootCategory from "./components/TodoList/SideBar/CustomCategories.jsx";
 import { getTodos, getRootCategories } from "./myAPIS.js";
 import { useStore } from "./store/todoState.js";
-
-const queryClient = new QueryClient();
 
 export default function Router() {
   const user = useUser((user) => user.user);
   const setAllTasks = useStore((store) => store.setAllTasks);
+
   const setAllSideRoots = useStore((store) => store.setAllSideRoots);
 
   // this function will get all needed items and store it in global state
@@ -41,7 +37,7 @@ export default function Router() {
     },
     {
       path: "/auth",
-      element: user ? <Navigate to={"/todos/all"} /> : null,
+      element: user ? <Navigate to={"/todos/work"} /> : null,
       children: [
         { path: "login", element: <LoginPage /> },
         { path: "signup", element: <SignupPage /> },
@@ -63,10 +59,8 @@ export default function Router() {
   ]);
   return (
     <div className="">
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools />
-      </QueryClientProvider>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools />
     </div>
   );
 }

@@ -5,11 +5,12 @@ import AddTodo from "./AddTodo";
 import MapTodos from "./MapTodos";
 import { useStore } from "../../../store/todoState";
 import { useUser } from "../../../store/authState";
+import { useParams } from "react-router-dom";
 
-export default function TodoList({ category, header }) {
+export default function TodoList() {
   const { token } = useUser((user) => user.user);
-  document.title = `AdhdList | ${header}`;
   const queryClient = useQueryClient();
+  const { title: category } = useParams();
 
   const setCurrentPage = useStore((store) => store.setCurrentPage);
 

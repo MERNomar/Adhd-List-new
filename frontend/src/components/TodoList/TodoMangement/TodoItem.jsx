@@ -17,12 +17,12 @@ export default function TodoItems({ items }) {
 
   const handlePanelItem = () => {
     setSidePanelItem(items);
-    SetSidePanelTab(false);
+    SetSidePanelTab(true);
     setIsSideNavOpen(true);
   };
 
   const checkSidePanel = () => {
-    return _id === sidePanelItem._id;
+    return _id === sidePanelItem?._id;
   };
   const handleClick = (e) => {
     e.stopPropagation();
