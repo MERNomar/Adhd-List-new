@@ -32,6 +32,34 @@
     .active {
       @apply bg-[#0e10134d] text-[#0077ffd0] hover:bg-[#0e10134d]
     }
+    .react-select-container {
+     @apply w-32 text-sm
+    }
+    .react-select-container .react-select__control {
+      @apply  border-2 bg-slate-700 border-slate-700 hover:border-slate-500;
+    }
+  
+    .react-select-container .react-select__control--is-focused {
+      @apply shadow-none border-slate-400 hover:border-slate-400;
+    }
+  
+    .react-select-container .react-select__menu {
+      @apply border-2 bg-slate-700 border-slate-600;
+    }
+  
+    .react-select-container .react-select__option {
+      @apply  text-slate-200 bg-slate-700 hover:bg-slate-800;
+    }
+  
+    .react-select-container .react-select__indicator-separator {
+      @apply bg-slate-400;
+    }
+  
+    .react-select-container .react-select__input-container,
+    .react-select-container .react-select__placeholder,
+    .react-select-container .react-select__single-value {
+      @apply  text-slate-200;
+    }
   }
 
   .active {
@@ -98,6 +126,26 @@
     background-color: #0080003d;
     visibility: hidden;
     opacity: 0;
+
+  }
+}
+
+
+.side-panel-change {
+  animation: 0.2s sidePanel;
+  animation-fill-mode: forwards;
+  position: relative;
+  left: 0;
+  visibility: visible;
+}
+
+
+@keyframes sidePanel {
+  50% {
+    padding-right: 2px;
+    padding-left: 2px;
+  }
+  100% {
 
   }
 }

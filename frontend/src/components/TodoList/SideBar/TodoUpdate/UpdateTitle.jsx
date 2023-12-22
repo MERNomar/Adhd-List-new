@@ -11,6 +11,7 @@ export default function UpdateTitle() {
     { value: "chocolate", label: "Chocolate" },
     { value: "strawberry", label: "Strawberry" },
     { value: "vanilla", label: "Vanilla" },
+    { value: "vanilla", label: "Vanilla" },
   ];
 
   const [hideState, setHideState] = useState(() => {
@@ -46,7 +47,7 @@ export default function UpdateTitle() {
         <div className="flex justify-center rounded-md py-[1px] px-1 bg-[#00000069]">
           <input
             disabled={!sidePanelItem}
-            className="bg-black border-black focus:border-blue-500 p-[10px] rounded shadow-sm w-[220px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px] text-base border-solid h-8 m-1 : "
+            className="bg-black text-xl font-bold border-slate-700 focus:border-blue-500 p-[10px] rounded shadow-sm w-[280px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px]  border-solid h-12 m-1 : "
             type="text"
             name="title"
             id="title"
@@ -54,15 +55,23 @@ export default function UpdateTitle() {
             placeholder={sidePanelItem.title}
             defaultValue={sidePanelItem.title}
           />
-          <button
-            className="flex justify-center p-2 m-0 transition-colors duration-100 ease-in-out rounded-full hover:bg-slate-800 w-9"
-            type="submit"
-          >
-            <EditIcon className="m-auto" />
-          </button>
         </div>
-        <div className="flex justify-around mt-1 text-lg bg-slate-700 w-[90%] m-auto py-1 rounded">
-          <Select options={options} />
+        <div className="flex justify-around mt-1 text-lg bg-neutral-900 w-[98%] m-auto py-1 rounded">
+          <Select
+            classNamePrefix={"react-select"}
+            className="react-select-container"
+            options={options}
+          />
+          <Select
+            className="react-select-container"
+            classNamePrefix={"react-select"}
+            options={options}
+          />
+        </div>
+        <div className="w-[95%] justify-center text-center mt-2  hover:shadow-lg  transition-all  shadow-black m-auto border-black border-[1px]  rounded clear-both">
+          <button className="w-full transition-colors duration-75 rounded bg-slate-700 hover:bg-slate-600">
+            Edit
+          </button>
         </div>
       </form>
     </>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 // Apis and global states
 import { useDrawer } from "../../../../store/todoState";
@@ -12,7 +12,7 @@ export default function SidePanel() {
   const queryClient = useQueryClient();
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const { token } = useUser((state) => state.user);
-
+  const [animationTrigger, setAnimationTrigger] = useState(false);
   const { mutate, isLoading } = useMutation({
     mutationFn: () => putUpdateTodo(),
     onSuccess: () => queryClient.invalidateQueries(["todos"]),
@@ -31,19 +31,21 @@ export default function SidePanel() {
     // });
   }, [sidePanelItem]);
   //* ------------------------ THE END OF IT -----------------
+  useEffect(() => {
+    setAnimationTrigger(!animationTrigger);
+  }, [sidePanelItem]);
 
   return (
     <>
-      <div className="mt-2">
-        <div className="h-8 m-2 overflow-hidden font-bold text-center text-blue-300 whitespace-nowrap text-ellipsis">
-          {sidePanelItem.title}
+      <div className={`mt-2 ${!animationTrigger && "side-panel-change"}`}>
+        <div className={`mt-2 ${animationTrigger && "side-panel-change"} `}>
+          {/* This one is hard to figure out right ? :D */}
+          <UpdateTitle />
+          {/* handle the stop watch and all the timer stuff */}
+          <StopWatch />
+          {/* adding steps to the task */}
+          <Steps />
         </div>
-        {/* This one is hard to figure out right ? :D */}
-        <UpdateTitle />
-        {/* handle the stop watch and all the timer stuff */}
-        <StopWatch />
-        {/* adding steps to the task */}
-        <Steps />
       </div>
     </>
   );
