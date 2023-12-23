@@ -33,7 +33,7 @@
       @apply bg-[#0e10134d] text-[#0077ffd0] hover:bg-[#0e10134d]
     }
     .react-select-container {
-     @apply w-32 text-sm
+     @apply w-[98%] m-auto text-sm font-bold
     }
     .react-select-container .react-select__control {
       @apply  border-2 bg-slate-700 border-slate-700 hover:border-slate-500;

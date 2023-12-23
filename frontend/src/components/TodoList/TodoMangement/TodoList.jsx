@@ -1,15 +1,10 @@
 import { useEffect } from "react";
-import { useMutation, useQueryClient } from "react-query";
-import { postTodo } from "../../../myAPIS";
 import AddTodo from "./AddTodo";
 import MapTodos from "./MapTodos";
 import { useStore } from "../../../store/todoState";
-import { useUser } from "../../../store/authState";
 import { useParams } from "react-router-dom";
 
 export default function TodoList() {
-  const { token } = useUser((user) => user.user);
-  const queryClient = useQueryClient();
   const { title: category } = useParams();
 
   const setCurrentPage = useStore((store) => store.setCurrentPage);
@@ -19,10 +14,6 @@ export default function TodoList() {
   }, [category]);
 
   const data = useStore((store) => store.allTasks);
-  const { mutate } = useMutation({
-    mutationFn: (todo) => postTodo(todo, token),
-    onSuccess: () => queryClient.invalidateQueries(["todos"]),
-  });
 
   if (!data) return;
 
@@ -33,27 +24,7 @@ export default function TodoList() {
         <MapTodos category={category} data={data} />
       </div>
 
-      <AddTodo mutate={mutate} category={category} />
+      <AddTodo category={category} />
     </>
   );
 }
-
-// function MapTodos({ category, data, isLoading, loadingTodo }) {
-//   const categoryFilter = data.filter((item) => {
-//     return item.category === category;
-//   });
-
-//   return (
-//     <>
-//       <ol className=" mb-5 overflow-auto min-h-[200px] h-[50%] ">
-//         {categoryFilter.length === 0 && (
-//           <p className="mb-9">No Todos Today !</p>
-//         )}
-//         {categoryFilter.map((todo) => {
-//           return <TodoItems key={todo._id} items={todo} />;
-//         })}
-//         {isLoading ? <TodoItems items={loadingTodo} /> : null}
-//       </ol>
-//     </>
-//   );
-// }

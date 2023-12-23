@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 // Apis and global states
-import { useDrawer } from "../../../../store/todoState";
+import { useDrawer, useStore } from "../../../../store/todoState";
 import { putUpdateTodo } from "../../../../myAPIS";
 import Steps from "./Steps";
 import StopWatch from "./StopWatch";
@@ -9,26 +9,28 @@ import UpdateTitle from "./UpdateTitle";
 import { useUser } from "../../../../store/authState";
 
 export default function SidePanel() {
-  const queryClient = useQueryClient();
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const { token } = useUser((state) => state.user);
+  const setAllTodos = useStore((store) => store.setAllTasks);
+  const allTodos = useStore((store) => store.allTasks);
   const [animationTrigger, setAnimationTrigger] = useState(false);
-  const { mutate, isLoading } = useMutation({
-    mutationFn: () => putUpdateTodo(),
-    onSuccess: () => queryClient.invalidateQueries(["todos"]),
+  const allTodosUpdate = allTodos.map((todo) => {
+    if (todo._id != sidePanelItem._id) return todo;
+    return sidePanelItem;
   });
-
   useEffect(() => {
     if (!sidePanelItem) return;
     putUpdateTodo({
       id: sidePanelItem._id,
       token,
-      sidePanelItem: { steps: sidePanelItem.steps, title: sidePanelItem.title },
+      sidePanelItem: {
+        steps: sidePanelItem.steps,
+        title: sidePanelItem.title,
+        category: sidePanelItem.category,
+        root_category: sidePanelItem.root_category,
+      },
     });
-    // mutate({
-    //   id: sidePanelItem._id,
-    //   sidePanelItem: { steps: sidePanelItem.steps, title: sidePanelItem.title },
-    // });
+    setAllTodos(allTodosUpdate);
   }, [sidePanelItem]);
   //* ------------------------ THE END OF IT -----------------
   useEffect(() => {

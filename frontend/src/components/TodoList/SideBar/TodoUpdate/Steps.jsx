@@ -78,6 +78,7 @@ function AddSteps() {
         { id: crypto.randomUUID(), step: InputValue },
       ],
     });
+    event.target.title.value = "";
   };
 
   return (

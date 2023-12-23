@@ -16,16 +16,9 @@ export default function AllTodos() {
   return (
     <>
       <ol>
-        {/* This will check if there is not todos */}
-        {arrayFilter.length === 0 ? (
-          <h3 className="m-auto mt-5 text-4xl font-bold text-center text-blue-300 animate-bounce">
-            Add Projects Now !{" "}
-          </h3>
-        ) : (
-          categoryFilter.map((todo) => {
-            return <TodoItem key={todo._id} items={todo} />;
-          })
-        )}
+        {categoryFilter.map((todo) => {
+          return <TodoItem key={todo._id} items={todo} />;
+        })}
       </ol>
     </>
   );

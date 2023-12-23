@@ -1,10 +1,14 @@
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useParams } from "react-router-dom";
+import { postTodo } from "../../../myAPIS";
 import { useUser } from "../../../store/authState";
-
-export default function AddTodo({ category, mutate }) {
+import { useStore } from "../../../store/todoState";
+export default function AddTodo({ category }) {
   const { child: currentRootRoute } = useParams();
+  const { token } = useUser((user) => user.user);
+  const allTasks = useStore((store) => store.allTasks);
+  const setAllTasks = useStore((store) => store.setAllTasks);
 
   const [title, setTitle] = useState("");
   const handleSubmit = (e) => {
@@ -19,8 +23,10 @@ export default function AddTodo({ category, mutate }) {
       worked_time: 0,
       steps: [],
     };
+    const tasksUpdate = allTasks.concat([todo]);
+    setAllTasks(tasksUpdate);
+    postTodo(todo, token);
     if (inputValue.length === 0) return;
-    mutate(todo);
     setTitle("");
   };
 

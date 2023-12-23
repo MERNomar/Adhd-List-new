@@ -12,17 +12,14 @@ import { useParams } from "react-router-dom";
 export default function CustomCategories() {
   const navItemsOpj = [
     {
-      id: crypto.randomUUID(),
       icon: <MyDaySVG />,
       link: "my-day",
     },
     {
-      id: crypto.randomUUID(),
       icon: <WorkSVG />,
       link: "work",
     },
     {
-      id: crypto.randomUUID(),
       icon: <ImportantSVG />,
       link: "important",
     },
@@ -37,7 +34,7 @@ export default function CustomCategories() {
         {/* This will map the top icons ( main categories ) */}
         <ul className="flex justify-center flex-1 gap-1 py-3 ">
           {navItemsOpj.map((navItem) => {
-            return <NavItem key={navItem.id} navItem={navItem} />;
+            return <NavItem key={navItem.link} navItem={navItem} />;
           })}
         </ul>
       </div>

@@ -36,6 +36,7 @@ const updateTodo = (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(400).json({ error: "Item was not found" });
   const data = req.body;
+  console.log(data);
   Todo.findByIdAndUpdate(id, data, { returnDocument: "after" })
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json({ error: err }));

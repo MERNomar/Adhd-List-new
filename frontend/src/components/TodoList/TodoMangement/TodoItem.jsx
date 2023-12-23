@@ -5,7 +5,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { useUser } from "../../../store/authState";
 
-export default function TodoItems({ items }) {
+export default function TodoItem({ items }) {
   const { _id, title, completed, time, steps } = items;
   const [completedState, setCompletedState] = useState(completed);
   const setSidePanelItem = useDrawer((store) => store.setSidePanelItem);
