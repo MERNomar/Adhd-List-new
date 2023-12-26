@@ -32,6 +32,7 @@ const deleteTodoById = (req, res) => {
 };
 
 const updateTodo = (req, res) => {
+  console.log(req.params.id);
   const id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(400).json({ error: "Item was not found" });
@@ -39,7 +40,10 @@ const updateTodo = (req, res) => {
   console.log(data);
   Todo.findByIdAndUpdate(id, data, { returnDocument: "after" })
     .then((data) => res.status(200).json(data))
-    .catch((err) => res.status(400).json({ error: err }));
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ error: err });
+    });
 };
 
 module.exports = {

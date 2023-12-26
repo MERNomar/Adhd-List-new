@@ -11,10 +11,11 @@ export default function AddTodo({ category }) {
   const setAllTasks = useStore((store) => store.setAllTasks);
 
   const [title, setTitle] = useState("");
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const inputValue = title;
     const todo = {
+      _id: "dummy",
       title: inputValue,
       category: category ? category : "null",
       root_category: currentRootRoute ? currentRootRoute : "null",
@@ -23,9 +24,10 @@ export default function AddTodo({ category }) {
       worked_time: 0,
       steps: [],
     };
-    const tasksUpdate = allTasks.concat([todo]);
-    setAllTasks(tasksUpdate);
-    postTodo(todo, token);
+    setAllTasks([...allTasks, todo]);
+    const { _id, ...NewTodo } = todo;
+    const res = await postTodo(NewTodo, token);
+    setAllTasks([...allTasks, res]);
     if (inputValue.length === 0) return;
     setTitle("");
   };

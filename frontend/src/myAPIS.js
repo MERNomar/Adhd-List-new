@@ -17,12 +17,14 @@ export const getTodos = async (token) => {
 export const postTodo = async (todo, token) => {
   console.log(todo);
   try {
-    return await ky.post(`/api/todos/post`, {
-      json: todo,
-      headers: {
-        authorization: `bearer ${token}`,
-      },
-    });
+    return await ky
+      .post(`/api/todos/post`, {
+        json: todo,
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+      })
+      .json();
   } catch (err) {
     console.log(err);
   }
