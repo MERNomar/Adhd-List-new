@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useDrawer, useStore } from "../../../../store/todoState";
-import EditIcon from "@mui/icons-material/Edit";
 import Arrow from "../../../assets/svg/Arrow";
 import Select from "react-select";
 
@@ -107,11 +106,15 @@ function UpdateCategory({
 }) {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
   const allSideRoots = useStore((store) => store.allSideRoots);
+
+  // those options are hardcoded since those will be the default main roots may make them customizable later
   const options = [
     { value: "my-day", label: "My Day" },
     { value: "work", label: "Work" },
     { value: "important", label: "Important" },
   ];
+
+  // this will filter and extract the needed roots and update the state
   const filterFunction = (array, compareItem, param) => {
     return array.filter((item) => {
       if (item[param] === compareItem) return item;
@@ -138,6 +141,7 @@ function UpdateCategory({
     });
   }, [sidePanelItem]);
 
+  // Dependent array whenever main root is picked this should filter to the needed array
   const dependentArray = allSideRoots
     .filter((item) => {
       if (item.category != currentSelectedCategory.value) return;
@@ -146,6 +150,8 @@ function UpdateCategory({
     .map((item) => {
       return { value: item._id, label: item.title };
     });
+
+  // the Inputs using react-select NPM
   return (
     <div className="flex c flex-col  mt-1 text-lg bg-neutral-900 w-[98%] m-auto py-1 rounded">
       <Select

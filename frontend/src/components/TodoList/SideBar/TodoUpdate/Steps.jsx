@@ -33,7 +33,16 @@ export default function Steps() {
 
 function MapSteps() {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
-  const setSidePanelItem = useDrawer((state) => state.updateSidePanel);
+  const setSidePanelItem = useDrawer((state) => state.setSidePanelItem);
+
+  const setCompleted = (id) => {
+    const mapSteps = sidePanelItem.steps.map((step) => {
+      if (step.id === id) return { ...step, completed: !step.completed };
+      return step;
+    });
+    setSidePanelItem({ ...sidePanelItem, steps: mapSteps });
+  };
+
   if (sidePanelItem.steps.length === 0) {
     return (
       <>
@@ -49,10 +58,21 @@ function MapSteps() {
         {sidePanelItem.steps.map((item) => {
           return (
             <li
-              className=" text-base bg-[#00000036] flex justify-between p-[2px] cursor-pointer hover:text-[#67a5df] hover:transition-colors duration-100 text-blue-100 show"
+              onClick={() => {
+                setCompleted(item.id);
+              }}
+              className={`
+              ${item.completed ? "border-green-500" : "border-blue-500"}
+              text-base bg-[#00000036] border-b  flex justify-between p-[2px] cursor-pointer hover:bg-[#00000062] hover:transition-colors duration-100 text-blue-500 show`}
               key={item.id}
             >
-              <div className="mx-5">{item.step}</div>
+              <div
+                className={`mx-5 text-lg font-medium ${
+                  item.completed ? "text-green-500" : "null"
+                }`}
+              >
+                {item.step}
+              </div>
               {/* <div className="mx-5">{item?.time_expected}</div> */}
             </li>
           );
@@ -70,12 +90,13 @@ function AddSteps() {
   const handleNewStep = (event) => {
     event.preventDefault();
     const InputValue = event.target.title.value;
+    if (InputValue.length >= 35) return;
     if (InputValue.length === 0) return;
     setSidePanelItem({
       ...sidePanelItem,
       steps: [
         ...sidePanelItem.steps,
-        { id: crypto.randomUUID(), step: InputValue },
+        { id: crypto.randomUUID(), step: InputValue, completed: false },
       ],
     });
     event.target.title.value = "";
