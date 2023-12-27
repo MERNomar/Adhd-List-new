@@ -60,7 +60,6 @@ export function RootCategory() {
   });
 
   const { title: category } = useParams();
-  console.log(category);
   const onSubmit = async (e) => {
     e.preventDefault();
     if (childTitle.length <= 3) return setErrorState("This Title is too short");
@@ -76,7 +75,11 @@ export function RootCategory() {
   };
   return (
     <>
-      <form onSubmit={(e) => onSubmit(e)} className={`justify-center  mt-1  `}>
+      <form
+        disabled={isLoading}
+        onSubmit={(e) => onSubmit(e)}
+        className={`justify-center  mt-1  `}
+      >
         <div className="flex justify-center rounded-md py-[1px]   bg-[#00000069]">
           <input
             className={` ${
@@ -88,6 +91,7 @@ export function RootCategory() {
             name="title"
             placeholder="Add project"
             id="title"
+            disabled={isLoading}
             value={childTitle}
             onChange={(e) => setChildTitle(e.target.value)}
           />
