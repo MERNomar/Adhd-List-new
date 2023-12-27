@@ -26,7 +26,7 @@ export default function TodoItem({ items }) {
   };
   const handleClick = (e) => {
     e.stopPropagation();
-    setCompletedState(true);
+    setCompletedState(!completedState);
     setCompleted(_id, token);
   };
   // global state
@@ -34,17 +34,20 @@ export default function TodoItem({ items }) {
   return (
     <li
       className={` li-item ${
-        completedState && "border-b-green-500  border-b-2 ele"
+        completedState &&
+        "bg-[#00800009] hover:bg-[#00800034] border-b-green-500  border-b-2 "
       }  ${
         checkSidePanel() &&
         "bg-[#1c1e24] hover:bg-[#1c1e24] border-b-blue-500 border-b-4 shadow-sm shadow-transparent"
-      }`}
+      }  h-[70px] text-ellipsis whitespace-nowrap overflow-hidden`}
       onClick={() => handlePanelItem()}
     >
       <div className="m-auto ml-2">{title}</div>
       <div
         onClick={(e) => handleClick(e)}
-        className="my-auto mr-5 text-3xl transition-all duration-200 hover:text-4xl hover:text-green-300"
+        className={`
+        ${checkSidePanel() && "text-4xl mr-10"}
+        my-auto mr-5 text-3xl text-center transition-all duration-200  hover:text-green-300`}
       >
         {completedState ? (
           <CheckCircleOutlineIcon

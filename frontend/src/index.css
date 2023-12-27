@@ -115,18 +115,9 @@
 }
 
 @keyframes fadeIn {
-  50% {
-
-  }
   100% {
     color: #064fe200;
-    height: 0px;
-    border: 0;
-    display: none;
     background-color: #0080003d;
-    visibility: hidden;
-    opacity: 0;
-
   }
 }
 

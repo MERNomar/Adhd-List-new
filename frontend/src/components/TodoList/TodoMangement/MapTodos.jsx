@@ -6,7 +6,6 @@ export default function AllTodos() {
   const { title: category, child: rootCategory } = useParams();
   const data = useStore((state) => state.allTasks);
   const arrayFilter = data.filter((item) => {
-    if (item.completed) return;
     if (rootCategory) {
       if (rootCategory === item.root_category) return item;
     } else return category === item.category;
