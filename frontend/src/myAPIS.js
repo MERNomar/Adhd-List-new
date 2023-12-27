@@ -91,12 +91,14 @@ export const getRootCategories = async (token) => {
 export const postRootCategories = async (item, token) => {
   console.log(item);
   try {
-    return await ky.post(`/api/category/post-category-root`, {
+    const test = await ky.post(`/api/category/post-category-root`, {
       json: item,
       headers: {
         authorization: `bearer ${token}`,
       },
     });
+    console.log(test);
+    return await test.json();
   } catch (err) {
     console.log(err);
   }

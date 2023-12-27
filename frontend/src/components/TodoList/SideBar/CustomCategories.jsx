@@ -8,6 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { postRootCategories } from "../../../myAPIS";
 import { useUser } from "../../../store/authState";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 export default function CustomCategories() {
   const navItemsOpj = [
@@ -48,45 +49,60 @@ export default function CustomCategories() {
 export function RootCategory() {
   const currentPage = useStore((store) => store.currentPage);
   const allSideRoots = useStore((store) => store.allSideRoots);
-  const setCurrentRoot = useStore((store) => store.setCurrentRoot);
-  const currentRoot = useStore((store) => store.currentRoot);
+  const setAllSideRoots = useStore((store) => store.setAllSideRoots);
+  const [errorState, setErrorState] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { token } = useUser((user) => user.user);
   const filterRoot = allSideRoots.filter((item) => {
     return item.category === currentPage;
   });
 
   const { title: category } = useParams();
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const title = e.target.title.value;
+    if (title.length <= 3) return setErrorState("This Title is too short");
+    if (title.length >= 23) return setErrorState("This Title is too long");
     const item = { title, category: category, completed: false };
-    postRootCategories(item, token);
+    setIsLoading(true);
+    setAllSideRoots([...allSideRoots, { ...item, _id: "dummy " }]);
     e.target.title.value = "";
+    const data = await postRootCategories(item, token);
+    setAllSideRoots([...allSideRoots, data]);
+    setIsLoading(false);
+    setErrorState(null);
   };
-
   return (
     <>
-      <form onSubmit={(e) => onSubmit(e)} className={`justify-center  mt-1 `}>
+      <form onSubmit={(e) => onSubmit(e)} className={`justify-center  mt-1  `}>
         <div className="flex justify-center rounded-md py-[1px]   bg-[#00000069]">
           <input
-            className="bg-black border-black focus:border-blue-500 p-[10px] rounded shadow-sm w-[220px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px] text-base border-solid h-8 m-1 : "
+            className={` ${
+              errorState ? "border-red-700" : "focus:border-blue-500"
+            }
+              bg-black border-black disabled:cursor-not-allowed   p-[10px] rounded shadow-sm w-[220px]
+             click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px] text-base border-solid h-8 m-1`}
             type="text"
             name="title"
             placeholder="Add project"
             id="title"
           />
           <button
-            className="flex justify-center p-2 m-0 transition-colors duration-100 ease-in-out rounded-full hover:bg-slate-800 w-9"
+            className="flex justify-center p-2 m-0 transition-colors duration-100 ease-in-out rounded-full disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-slate-800 w-9"
             type="submit"
+            disabled={isLoading}
           >
             <AddIcon className="m-auto text-blue-500" />
           </button>
         </div>
+        {errorState && (
+          <div className="text-sm text-center text-red-500">{errorState}</div>
+        )}
       </form>{" "}
-      <ul className="flex flex-col justify-center flex-1 gap-1 py-2 font-medium">
+      <ul className="flex flex-col  flex-1 gap-1 py-2 overflow-auto font-medium h-[50vh] lg:h-[68vh]">
         {filterRoot.map((item) => {
           return (
-            <li className="px-3 text-base transition-colors" key={item._id}>
+            <li className="px-3 text-base transition-colors " key={item._id}>
               <NavLink
                 to={currentPage + "/" + item._id}
                 className="flex items-center gap-3 rounded p-3 text-gray-100 transition-colors  hover:text-[#0084ff]  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
