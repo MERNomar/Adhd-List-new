@@ -52,21 +52,23 @@ export function RootCategory() {
   const setAllSideRoots = useStore((store) => store.setAllSideRoots);
   const [errorState, setErrorState] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [childTitle, setChildTitle] = useState("");
+
   const { token } = useUser((user) => user.user);
   const filterRoot = allSideRoots.filter((item) => {
-    return item.category === currentPage;
+    return item?.category === currentPage;
   });
 
   const { title: category } = useParams();
+  console.log(category);
   const onSubmit = async (e) => {
     e.preventDefault();
-    const title = e.target.title.value;
-    if (title.length <= 3) return setErrorState("This Title is too short");
-    if (title.length >= 23) return setErrorState("This Title is too long");
-    const item = { title, category: category, completed: false };
+    if (childTitle.length <= 3) return setErrorState("This Title is too short");
+    if (childTitle.length >= 23) return setErrorState("This Title is too long");
+    const item = { title: childTitle, category: category, completed: false };
     setIsLoading(true);
     setAllSideRoots([...allSideRoots, { ...item, _id: "dummy " }]);
-    e.target.title.value = "";
+    setChildTitle("");
     const data = await postRootCategories(item, token);
     setAllSideRoots([...allSideRoots, data]);
     setIsLoading(false);
@@ -86,6 +88,8 @@ export function RootCategory() {
             name="title"
             placeholder="Add project"
             id="title"
+            value={childTitle}
+            onChange={(e) => setChildTitle(e.target.value)}
           />
           <button
             className="flex justify-center p-2 m-0 transition-colors duration-100 ease-in-out rounded-full disabled:cursor-not-allowed disabled:hover:bg-transparent hover:bg-slate-800 w-9"
