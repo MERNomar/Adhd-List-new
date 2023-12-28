@@ -116,8 +116,10 @@
 
 @keyframes fadeIn {
   100% {
+    
     color: #064fe200;
     background-color: #0080003d;
+    padding: 50px;
   }
 }
 

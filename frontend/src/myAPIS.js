@@ -30,11 +30,11 @@ export const postTodo = async (todo, token) => {
   }
 };
 
-export const setCompleted = async (id, token) => {
+export const setCompleted = async (id, token, state) => {
   try {
     return await ky
       .put(`/api/todos/update-todo/${id}`, {
-        json: { completed: true },
+        json: { completed: state },
         headers: {
           authorization: `bearer ${token}`,
         },
@@ -97,7 +97,6 @@ export const postRootCategories = async (item, token) => {
         authorization: `bearer ${token}`,
       },
     });
-    console.log(test);
     return await test.json();
   } catch (err) {
     console.log(err);

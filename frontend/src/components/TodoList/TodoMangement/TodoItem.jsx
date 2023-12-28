@@ -5,7 +5,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import { useUser } from "../../../store/authState";
 
-export default function TodoItem({ items }) {
+export default function TodoItem({ items, hiddenState }) {
   const { _id, title, completed, time, steps } = items;
   const [completedState, setCompletedState] = useState(completed);
   const setSidePanelItem = useDrawer((store) => store.setSidePanelItem);
@@ -27,16 +27,18 @@ export default function TodoItem({ items }) {
   const handleClick = (e) => {
     e.stopPropagation();
     setCompletedState(!completedState);
-    setCompleted(_id, token);
+    setCompleted(_id, token, !completedState);
   };
   // global state
   //----
   return (
     <li
-      className={` li-item ${
+      className={` li-item
+      ${
         completedState &&
-        "bg-[#00800009] hover:bg-[#00800034] border-b-green-500  border-b-2 "
-      }  ${
+        hiddenState &&
+        "hidden side-panel-change   border-b-2 "
+      }  ${completedState && " border-b-green-500 "}  ${
         checkSidePanel() &&
         "bg-[#1c1e24] hover:bg-[#1c1e24] border-b-blue-500 border-b-4 shadow-sm shadow-transparent"
       }  h-[70px] text-ellipsis whitespace-nowrap overflow-hidden`}
