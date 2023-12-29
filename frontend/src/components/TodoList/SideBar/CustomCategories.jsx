@@ -29,7 +29,7 @@ export default function CustomCategories() {
   return (
     <nav
       aria-label="side navigation"
-      className="flex-1 divide-slate-100 overflow-auto border-r-[1px]  border-[#2d888011] bg-[#23272f] "
+      className="flex-1 divide-slate-100 overflow-auto border-r-[1px]   border-[#2d888011] dark:bg-[#23272f] "
     >
       <div>
         {/* This will map the top icons ( main categories ) */}
@@ -85,7 +85,7 @@ export function RootCategory() {
             className={` ${
               errorState ? "border-red-700" : "focus:border-blue-500"
             }
-              bg-black border-black disabled:cursor-not-allowed   p-[10px] rounded shadow-sm w-[220px]
+              dark:bg-black bg-neutral-300 border-black disabled:cursor-not-allowed   p-[10px] rounded shadow-sm w-[220px]
              click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px] text-base border-solid h-8 m-1`}
             type="text"
             name="title"
@@ -113,7 +113,7 @@ export function RootCategory() {
             <li className="px-3 text-base transition-colors " key={item._id}>
               <NavLink
                 to={currentPage + "/" + item._id}
-                className="flex items-center gap-3 rounded p-3 text-gray-100 transition-colors  hover:text-[#0084ff]  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
+                className="flex items-center gap-3 rounded p-3 text-black dark:text-gray-100 transition-colors  hover:text-[#0084ff]   dark:aria-[current=page]:bg-[#283541]  aria-[current=page]:text-black "
               >
                 <div> {item.title}</div>
               </NavLink>
@@ -131,7 +131,7 @@ function NavItem({ navItem }) {
       <li className="px-3">
         <NavLink
           to={navItem.link}
-          className="flex items-center gap-3 rounded p-3 text-gray-100 transition-colors  hover:text-[#0084ff]  aria-[current=page]:bg-[#283541] aria-[current=page]:text-gray-100 "
+          className="flex items-center gap-3 rounded p-3 dark:text-gray-100 text-black transition-colors  hover:text-[#0084ff]  dark:aria-[current=page]:bg-[#283541] aria-[current=page]:text-black "
         >
           <div className="flex items-center self-center w-6">
             {navItem.icon}

@@ -13,17 +13,24 @@ import { useUser } from "./store/authState.js";
 import AdhdRoot from "./components/TodoList/AdhdRoot.jsx";
 import TodoList from "./components/TodoList/TodoMangement/TodoList.jsx";
 import { getTodos, getRootCategories } from "./myAPIS.js";
-import { useStore } from "./store/todoState.js";
+import { useDarkMode, useStore } from "./store/todoState.js";
 
 export default function Router() {
   const user = useUser((user) => user.user);
   const setAllTasks = useStore((store) => store.setAllTasks);
 
+  const darkMode = useDarkMode((dark) => dark.darkMode);
+
   const setAllSideRoots = useStore((store) => store.setAllSideRoots);
+
+  const handleColorChange = (primaryColor) => {
+    document.documentElement.style.setProperty("--primary-color", primaryColor);
+  };
 
   // this function will get all needed items and store it in global state
   // the loader is for cleaner code and better performance
   const tasksLoader = async () => {
+    handleColorChange(darkMode ? "#1a1d23" : "white");
     const TasksData = await getTodos(user.token);
     setAllTasks(TasksData);
     const categoryData = await getRootCategories(user.token);
@@ -58,7 +65,7 @@ export default function Router() {
     },
   ]);
   return (
-    <div className="">
+    <div>
       <RouterProvider router={router} />
       <ReactQueryDevtools />
     </div>

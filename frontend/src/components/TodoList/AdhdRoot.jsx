@@ -5,15 +5,18 @@ import { useDarkMode, useDrawer, useStore } from "../../store/todoState";
 import NavBar from "./NavBar/NavBar";
 import { useEffect, useState } from "react";
 import { useUser } from "../../store/authState";
+import "../../index.css";
 
 export default function App() {
   const isSideNavOpen = useDrawer((nav) => nav.isSideNavOpen);
   const setIsSideNavOpen = useDrawer((nav) => nav.setIsSideNavOpen);
   const isSizeOk = useDrawer((nav) => nav.isSizeOk);
   const darkMode = useDarkMode((store) => store.darkMode);
-
+  const handleColorChange = () => {
+    document.documentElement.style.setProperty("--primary-color", primaryColor);
+  };
   return (
-    <div className={`${darkMode ? "dark" : "null"}`}>
+    <div className={`${darkMode ? "dark" : "null"} slide`}>
       {isSideNavOpen && isSizeOk ? (
         <div
           onClick={() => {
@@ -24,7 +27,8 @@ export default function App() {
       ) : (
         ""
       )}
-      <div className=" lg:ml-[286px] text-2xl mt-[70px] ">
+
+      <div className=" lg:ml-[286px] text-2xl mt-[70px] text-black test  dark:text-white min-h-screen  dark:bg-[#1a1d23] bg-white ">
         <NavBar />
         <SideDrawer />
         <Outlet />

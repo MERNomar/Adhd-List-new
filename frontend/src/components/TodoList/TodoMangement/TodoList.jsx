@@ -20,7 +20,7 @@ export default function TodoList() {
   return (
     <>
       {/*header*/}
-      <div className=" overflow-auto bg-[#22252c] m-3 text-gray-100 flex-grow h-[78vh]">
+      <div className=" overflow-auto transition-colors duration-100 bg-neutral-300 dark:bg-[#22252c] m-3 text-gray-100 flex-grow h-[78vh]">
         <MapTodos category={category} data={data} />
       </div>
 

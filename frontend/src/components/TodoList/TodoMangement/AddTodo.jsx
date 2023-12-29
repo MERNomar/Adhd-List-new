@@ -41,14 +41,18 @@ export default function AddTodo({ category }) {
   return (
     <>
       <form
-        className="  flex h-16 w-[97%] m-auto bg-[#15171c] rounded px-2"
+        className="  flex h-16 w-[97%] m-auto bg-neutral-300 dark:bg-[#15171c] rounded px-2"
         onSubmit={(e) => handleSubmit(e)}
         disabled={isLoading}
       >
         <input
           className={`
-          ${errorState ? "border-red-500" : " focus:border-blue-900 "}
-          z-40 p-1 mr-[7px] my-auto text-xl w-[98%]  px-2  outline-none bg-black border-[1px] border-stone-500  h-12`}
+          ${
+            errorState
+              ? "focus:border-red-500 border-red-500 border-2"
+              : " focus:border-blue-900 border-stone-500 "
+          }
+          z-40 p-1 mr-[7px] my-auto text-xl w-[98%]  px-2  outline-none dark:bg-black border-[1px]   h-12`}
           placeholder="Add Todo"
           value={title}
           disabled={isLoading}
@@ -56,7 +60,7 @@ export default function AddTodo({ category }) {
         />
         <div className="pl-2 ml-1 border-l-2 my-auto border-l-[#ffffff54]">
           <button
-            className="p-1 my-auto text-blue-700 transition-colors ease-in-out rounded hover:duration-100 active:duration-0 active:bg-slate-700 hover:bg-slate-800"
+            className="p-1 my-auto text-blue-700 transition-colors ease-in-out rounded hover:duration-100 hover:bg-neutral-400 active:bg-neutral-500 active:duration-0 dark:active:bg-slate-700 dark:hover:bg-slate-800"
             type="submit"
             disabled={isLoading}
           >

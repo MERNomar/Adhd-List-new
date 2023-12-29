@@ -70,7 +70,7 @@ function UpdateForm() {
       <div className="w-[95%] justify-center text-center mt-2  hover:shadow-lg  transition-all  shadow-black m-auto border-black border-[1px]  rounded clear-both">
         <button
           type="submit"
-          className="w-full transition-colors duration-75 rounded bg-slate-700 hover:bg-slate-600"
+          className="w-full transition-colors duration-75 rounded dark:bg-slate-700 bg-neutral-400 dark:hover:bg-slate-600"
         >
           Edit
         </button>
@@ -86,7 +86,7 @@ function UpdateTitle() {
     <div className="flex justify-center rounded-md py-[1px] px-1 bg-[#00000069]">
       <input
         disabled={!sidePanelItem}
-        className="bg-black text-xl font-bold border-slate-700 focus:border-blue-500 p-[10px] rounded shadow-sm w-[280px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px]  border-solid h-12 m-1 : "
+        className="dark:bg-black bg-neutral-200 text-xl font-bold border-slate-700 focus:border-blue-500 p-[10px] rounded shadow-sm w-[280px] click:transition-colors duration-300 outline-[0] border-[#2941913f] border-[1px]  border-solid h-12 m-1 : "
         type="text"
         name="title"
         id="title"
@@ -153,7 +153,7 @@ function UpdateCategory({
 
   // the Inputs using react-select NPM
   return (
-    <div className="flex c flex-col  mt-1 text-lg bg-neutral-900 w-[98%] m-auto py-1 rounded">
+    <div className="flex c flex-col  mt-1 text-lg dark:bg-neutral-900 w-[98%] m-auto py-1 rounded">
       <Select
         value={currentSelectedCategory}
         classNamePrefix={"react-select"}

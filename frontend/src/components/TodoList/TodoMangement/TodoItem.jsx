@@ -40,16 +40,16 @@ export default function TodoItem({ items, hiddenState }) {
         "hidden side-panel-change   border-b-2 "
       }  ${completedState && " border-b-green-500 "}  ${
         checkSidePanel() &&
-        "bg-[#1c1e24] hover:bg-[#1c1e24] border-b-blue-500 border-b-4 shadow-sm shadow-transparent"
-      }  h-[70px] text-ellipsis whitespace-nowrap overflow-hidden`}
+        "dark:bg-[#1c1e24] bg-white hover:bg-white  border-b-blue-500 border-b-4 shadow-sm shadow-transparent"
+      }  h-[70px] text-ellipsis whitespace-nowrap overflow-hidden hover:bg-white dark:bg-[#1c1e24] bg-white dark:text-white text-black `}
       onClick={() => handlePanelItem()}
     >
-      <div className="m-auto ml-2">{title}</div>
+      <div className="m-auto ml-2 ">{title}</div>
       <div
         onClick={(e) => handleClick(e)}
         className={`
-        ${checkSidePanel() && "text-4xl mr-10"}
-        my-auto mr-5 text-3xl text-center transition-all duration-200  hover:text-green-300`}
+        ${checkSidePanel() && "text-4xl mr-9"}
+        my-auto mr-5 text-3xl text-center  transition-all duration-75    hover:text-green-300`}
       >
         {completedState ? (
           <CheckCircleOutlineIcon

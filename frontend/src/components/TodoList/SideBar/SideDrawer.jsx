@@ -14,7 +14,7 @@ export default function SideNavigationUserContacts() {
     <>
       <div
         id="logo-sidebar"
-        className={` fixed top-0 left-0 z-[70]  w-64 `}
+        className={` fixed top-0 left-0 z-[70]   w-64 `}
         aria-label="Sidebar"
       >
         <aside
@@ -22,21 +22,21 @@ export default function SideNavigationUserContacts() {
           aria-label="Side navigation"
           className={`  lg:translate-x-0 ${
             isSideNavOpen ? "translate-x-0 " : " -translate-x-full"
-          }  h-full fixed  bottom-0 left-0  flex w-72 flex-col   bg-[#232730] transition-transform }`}
+          }  h-full fixed  bottom-0 left-0 bg-neutral-300 dark:bg-[#232730] flex w-72 flex-col    transition-transform }`}
         >
           <div
             to="/"
-            className="flex  items-center gap-4  h-[60px] border-b-[1px]  border-[#ffffff3d] bg-[#23272f]"
+            className="flex  items-center gap-4  h-[60px] border-b-[1px]  border-[#ffffff3d] bg-neutral-300 dark:bg-[#23272f]"
           >
             <div className="h-60"></div>
             <Link to={"/"}>
               <img
-                className="w-11  ml-3  border-[#ffffff0e] border-r-2 border-solid pr-3"
+                className="w-11  ml-3 border-neutral-700  dark:border-[#ffffff0e] border-r-2 border-solid pr-3"
                 src={logo}
                 alt="logo"
               />
             </Link>
-            <div className="font-mont text-[#c4c0c0]">
+            <div className="font-mont text-black dark:text-[#c4c0c0]">
               <h3>AdhdList</h3>
               <p className="text-xs ">Get your shit done!</p>
             </div>
@@ -55,9 +55,11 @@ function ControlPanelItem() {
   const SetSidePanelTab = useDrawer((item) => item.SetSidePanelTab);
   return (
     <>
-      <div className="flex justify-around align border-[#2d5d8533] border bg-[#00000042] ">
+      <div className="flex justify-around align border-[#2d5d8533] border dark:bg-[#00000042] bg-neutral-400 ">
         <button
-          className={`drawer-button ${!sidePanelTab && "bg-slate-700"}`}
+          className={`drawer-button ${
+            !sidePanelTab && "dark:bg-slate-700 bg-neutral-500"
+          }`}
           onClick={() => SetSidePanelTab(false)}
         >
           <DensitySmallIcon />
@@ -65,8 +67,10 @@ function ControlPanelItem() {
         <button
           disabled={!sidePanelItem}
           className={`${
-            !sidePanelItem?.steps && "text-gray-600 hover:bg-[#ffffff00]"
-          } drawer-button ${sidePanelTab && "bg-slate-700"}`}
+            !sidePanelItem?.steps && "text-gray-600 "
+          } drawer-button ${
+            sidePanelTab && "dark:bg-slate-700 bg-neutral-500"
+          }`}
           onClick={() => {
             if (!sidePanelItem?.steps) return;
             SetSidePanelTab(true);
@@ -75,7 +79,7 @@ function ControlPanelItem() {
           <MicrowaveIcon />
         </button>
       </div>
-      <div className="transition-all ease-in-out">
+      <div className="transition-all ease-in-out bg-neutral-300 dark:bg-[#232730]">
         {!sidePanelTab ? <CustomCategories /> : <SidePanel />}
       </div>
     </>

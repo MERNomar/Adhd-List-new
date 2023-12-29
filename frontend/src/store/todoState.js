@@ -31,7 +31,15 @@ export const useDrawer = create(
   )
 );
 
-export const useDarkMode = create((set) => ({
-  darkMode: false,
-  setDarkMode: () => set((item) => ({ darkMode: !item.darkMode })),
-}));
+export const useDarkMode = create(
+  persist(
+    (set, get) => ({
+      darkMode: true,
+      setDarkMode: () => set((item) => ({ darkMode: !item.darkMode })),
+    }),
+    {
+      name: "dark-mode",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

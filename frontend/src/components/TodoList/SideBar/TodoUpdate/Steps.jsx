@@ -46,7 +46,7 @@ function MapSteps() {
   if (sidePanelItem.steps.length === 0) {
     return (
       <>
-        <div htmlFor="step" className="text-base text-blue-100 ">
+        <div htmlFor="step" className="mt-2 text-center dark:text-blue-100 ">
           Add Steps !
         </div>
       </>
@@ -62,13 +62,17 @@ function MapSteps() {
                 setCompleted(item.id);
               }}
               className={`
-              ${item.completed ? "border-green-500" : "border-blue-500"}
-              text-base bg-[#00000036] border-b  flex justify-between p-[2px] cursor-pointer hover:bg-[#00000062] hover:transition-colors duration-100 text-blue-500 show`}
+              ${
+                item.completed
+                  ? "dark:border-green-500 border-green-700"
+                  : "dark:border-blue-500 border-blue-700"
+              }
+              text-base bg-[#00000036] border-b  flex justify-between p-[2px] cursor-pointer hover:bg-[#00000062] hover:transition-colors duration-100 text-blue-700 show`}
               key={item.id}
             >
               <div
                 className={`mx-5 text-lg font-medium ${
-                  item.completed ? "text-green-500" : "null"
+                  item.completed ? "text-green-700" : "null"
                 }`}
               >
                 {item.step}
@@ -113,7 +117,7 @@ function AddSteps() {
         <label className="  flex justify-center w-full bg-[#00000069]">
           <input
             disabled={!sidePanelItem}
-            className="bg-black border-black focus:border-blue-500  p-[10px] rounded shadow-sm  w-[220px] click:transition-colors	duration-300	  outline-[0]  border-[#2941913f] border-[1px] text-base  border-solid h-8  m-1 : "
+            className="dark:bg-black border-black focus:border-blue-500  p-[10px] rounded shadow-sm  w-[220px] click:transition-colors	duration-300	  outline-[0]  border-[#2941913f] border-[1px] text-base  border-solid h-8  m-1 : "
             type="text"
             name="title"
             id="title"
