@@ -12,9 +12,7 @@ export default function App() {
   const setIsSideNavOpen = useDrawer((nav) => nav.setIsSideNavOpen);
   const isSizeOk = useDrawer((nav) => nav.isSizeOk);
   const darkMode = useDarkMode((store) => store.darkMode);
-  const handleColorChange = () => {
-    document.documentElement.style.setProperty("--primary-color", primaryColor);
-  };
+
   return (
     <div className={`${darkMode ? "dark" : "null"} slide`}>
       {isSideNavOpen && isSizeOk ? (
