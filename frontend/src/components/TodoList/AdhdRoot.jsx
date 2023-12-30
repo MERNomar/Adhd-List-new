@@ -1,10 +1,7 @@
 import { Outlet } from "react-router-dom";
 import SideDrawer from "./SideBar/SideDrawer";
-import { getTodos, getRootCategories } from "../../myAPIS";
 import { useDarkMode, useDrawer, useStore } from "../../store/todoState";
 import NavBar from "./NavBar/NavBar";
-import { useEffect, useState } from "react";
-import { useUser } from "../../store/authState";
 import "../../index.css";
 
 export default function App() {
@@ -12,9 +9,17 @@ export default function App() {
   const setIsSideNavOpen = useDrawer((nav) => nav.setIsSideNavOpen);
   const isSizeOk = useDrawer((nav) => nav.isSizeOk);
   const darkMode = useDarkMode((store) => store.darkMode);
+  const setHideUserNavbarMenu = useStore(
+    (store) => store.setHideUserNavbarMenu
+  );
 
   return (
-    <div className={`${darkMode ? "dark" : "null"} slide`}>
+    <div
+      onClick={() => {
+        setHideUserNavbarMenu(true);
+      }}
+      className={`${darkMode ? "dark" : "null"} slide`}
+    >
       {isSideNavOpen && isSizeOk ? (
         <div
           onClick={() => {

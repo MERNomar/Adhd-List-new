@@ -39,9 +39,10 @@ export default function TodoItem({ items, hiddenState }) {
         hiddenState &&
         "hidden side-panel-change   border-b-2 "
       }  ${completedState && " border-b-green-500 "}  ${
-        checkSidePanel() &&
-        "dark:bg-[#1c1e24] bg-white hover:bg-white  border-b-blue-500 border-b-4 shadow-sm shadow-transparent"
-      }  h-[70px] text-ellipsis whitespace-nowrap overflow-hidden hover:bg-white dark:bg-[#1c1e24] bg-white dark:text-white text-black `}
+        checkSidePanel()
+          ? "dark:bg-[#16181d] bg-white hover:bg-white  border-b-blue-500 border-b-4 shadow-sm shadow-transparent"
+          : "hover:bg-[#dfdede] dark:hover:bg-[#2e2c2c46]"
+      }  h-[70px] text-ellipsis whitespace-nowrap overflow-hidden  dark:bg-[#1c1e24]  bg-white dark:text-white text-black `}
       onClick={() => handlePanelItem()}
     >
       <div className="m-auto ml-2 ">{title}</div>

@@ -10,6 +10,8 @@ export const useStore = create((set) => ({
   setCurrentPage: (currentPage) => set({ currentPage: currentPage }),
   currentRoot: "",
   setCurrentRoot: (currentRoot) => set({ currentRoot: currentRoot }),
+  hideUserNavbarMenu: true,
+  setHideUserNavbarMenu: (value) => set({ hideUserNavbarMenu: value }),
 }));
 
 export const useDrawer = create(

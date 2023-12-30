@@ -3,6 +3,9 @@
 @tailwind utilities;
 
   @layer components {
+    .user-menu-item {
+      @apply hover:bg-[#00000067] p-1 border-b-2 text-lg cursor-pointer
+    }
     .nav-li {
       @apply cursor-pointer  float-left m-2 hover:bg-[#0e10134d] p-4;
     }
