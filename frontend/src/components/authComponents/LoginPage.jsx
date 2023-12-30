@@ -51,7 +51,7 @@ export default function Signup() {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               required
-              type="email"
+              type="adhd-list-password-signup"
               placeholder="Enter your email"
             />
           </div>
@@ -69,6 +69,7 @@ export default function Signup() {
               required
               value={password}
               minLength={8}
+              autoComplete="adhd-list-password-login"
               type="password"
               placeholder="********"
             />
