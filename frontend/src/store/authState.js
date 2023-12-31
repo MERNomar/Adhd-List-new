@@ -10,7 +10,7 @@ export const useUser = create(
     }),
     {
       name: "user-auth",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );

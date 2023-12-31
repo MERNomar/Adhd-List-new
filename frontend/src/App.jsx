@@ -30,6 +30,7 @@ export default function Router() {
   // this function will get all needed items and store it in global state
   // the loader is for cleaner code and better performance
   const tasksLoader = async () => {
+    if (!user) return "";
     handleColorChange(darkMode ? "#1a1d23" : "white");
     const TasksData = await getTodos(user.token);
     setAllTasks(TasksData);
@@ -44,7 +45,7 @@ export default function Router() {
     },
     {
       path: "/auth",
-      element: user ? <Navigate to={"/todos/work"} /> : null,
+      element: user ? <Navigate to={"/app/todos/work"} /> : null,
       children: [
         { path: "login", element: <LoginPage /> },
         { path: "signup", element: <SignupPage /> },
@@ -52,14 +53,35 @@ export default function Router() {
       ],
     },
     {
-      path: "/todos",
-      element: user ? <AdhdRoot /> : <Navigate to={"/auth/login"} />,
-      loader: tasksLoader,
+      path: "/app",
+      element: user ? null : <Navigate to={"/auth/login"} />,
       children: [
         {
-          path: ":title",
-          element: <TodoList />,
-          children: [{ path: ":child", element: <TodoList /> }],
+          path: "todos",
+          element: <AdhdRoot />,
+          loader: tasksLoader,
+          children: [
+            {
+              path: ":title",
+              element: <TodoList />,
+              children: [{ path: ":child", element: <TodoList /> }],
+            },
+          ],
+        },
+        {
+          path: "user",
+          element: <p>item</p>,
+          //loader: userLoader,
+          children: [
+            {
+              path: "information",
+              element: <p>information</p>,
+            },
+            {
+              path: "statistics",
+              element: <p>statistics</p>,
+            },
+          ],
         },
       ],
     },

@@ -9,17 +9,9 @@ export default function App() {
   const setIsSideNavOpen = useDrawer((nav) => nav.setIsSideNavOpen);
   const isSizeOk = useDrawer((nav) => nav.isSizeOk);
   const darkMode = useDarkMode((store) => store.darkMode);
-  const setHideUserNavbarMenu = useStore(
-    (store) => store.setHideUserNavbarMenu
-  );
 
   return (
-    <div
-      onClick={() => {
-        setHideUserNavbarMenu(true);
-      }}
-      className={`${darkMode ? "dark" : "null"} slide`}
-    >
+    <div className={`${darkMode ? "dark" : "null"} slide`}>
       {isSideNavOpen && isSizeOk ? (
         <div
           onClick={() => {

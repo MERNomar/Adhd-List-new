@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useDarkMode, useDrawer } from "../../../store/todoState";
 import useWindowDimensions from "../../../hooks/getWindowDimensions";
 import { Dehaze, GitHub, Brightness4 } from "@mui/icons-material";
-import UserSettingsNavButton from "./UserNav";
+import { useUser } from "../../../store/authState";
+import { Person } from "@mui/icons-material";
+import { useStore } from "../../../store/todoState";
+import { Link } from "react-router-dom";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 
 export default function NavBar() {
   return (
@@ -13,6 +17,7 @@ export default function NavBar() {
         <UserSettingsNavButton />
         <DarkModeNavButton />
         <GithubNavButton />
+        <Logout />
       </div>
     </nav>
   );
@@ -22,7 +27,7 @@ function GithubNavButton() {
   const GITHUB_LINK = `https://github.com/MERNomar/Adhd-List-new`;
   return (
     <button>
-      <a target="_blank" href={GITHUB_LINK} className="mr-7 nav-item">
+      <a target="_blank" href={GITHUB_LINK} className=" nav-item">
         <GitHub className="icon-button" />
       </a>
     </button>
@@ -40,6 +45,29 @@ function DarkModeNavButton() {
       className=" nav-item"
     >
       <Brightness4 className="icon-button" />
+    </button>
+  );
+}
+
+function UserSettingsNavButton() {
+  return (
+    <Link className=" nav-item" to={"/app/user/information"}>
+      <Person className="icon-button" />
+    </Link>
+  );
+}
+
+function Logout() {
+  const setLogout = useUser((user) => user.setLogout);
+
+  const handleClick = () => {
+    if (confirm("You will be logged out")) {
+      setLogout(null);
+    }
+  };
+  return (
+    <button onClick={() => handleClick()} className=" nav-item mr-7">
+      <MeetingRoomIcon className="icon-button" />
     </button>
   );
 }
