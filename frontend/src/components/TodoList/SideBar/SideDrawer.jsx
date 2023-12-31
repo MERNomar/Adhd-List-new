@@ -67,7 +67,8 @@ function ControlPanelItem() {
         <button
           disabled={!sidePanelItem}
           className={`${
-            !sidePanelItem?.steps && "text-gray-600 "
+            !sidePanelItem?.steps &&
+            "text-gray-600 dark:text-gray-600 hover:bg-transparent dark:hover:bg-transparent "
           } drawer-button ${
             sidePanelTab && "dark:bg-slate-700 bg-neutral-500"
           }`}
