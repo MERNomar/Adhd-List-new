@@ -57,10 +57,18 @@ export default function Router() {
       element: user ? null : <Navigate to={"/auth/login"} />,
       children: [
         {
+          path: "",
+          element: <Navigate to={"todos/work"} />,
+        },
+        {
           path: "todos",
           element: <AdhdRoot />,
           loader: tasksLoader,
           children: [
+            {
+              path: "",
+              element: <Navigate to={"work"} />,
+            },
             {
               path: ":title",
               element: <TodoList />,
