@@ -23,7 +23,7 @@ export default function App() {
         ""
       )}
 
-      <div className=" lg:ml-[286px] text-2xl mt-[70px] text-black test  dark:text-white min-h-screen  dark:bg-[#1a1d23] bg-white ">
+      <div className=" lg:ml-[286px] text-2xl mt-[70px] text-black test  dark:text-white   dark:bg-[#1a1d23] bg-white ">
         <NavBar />
         <SideDrawer />
         <Outlet />
