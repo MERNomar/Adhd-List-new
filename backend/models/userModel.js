@@ -1,71 +1,70 @@
-const mongoose = require('mongoose')
-const {Schema} = mongoose
-const bcrypt = require('bcrypt')
-const validator = require('validator')
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
+const bcrypt = require("bcrypt");
+const validator = require("validator");
 
-const userSchema = new Schema({
-    username : {type : String , required : true},
-    password : {type : String , required : true},
-    email : {type : String , required : true , unique : true}
-} , {timestamps : true})
+const userSchema = new Schema(
+  {
+    username: { type: String, required: true },
+    password: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+  },
+  { timestamps: true }
+);
 
 // user schema method created
-userSchema.statics.signup = async function( email , password , username) {
+userSchema.statics.signup = async function (email, password, username) {
+  //Add Check that both email and password exist
+  if (!email || !password || !username) {
+    throw Error("Please fill all fields");
+  }
 
-     //Add Check that both email and password exist 
-     if (!email || !password || !username){
-        throw Error("Please fill all fields")
-     }
+  if (!validator.isEmail(email)) {
+    throw Error("Please enter valid email");
+  }
 
-    if(!validator.isEmail(email)) {
-        throw Error("Please enter valid email")
-    }
+  if (!email.length >= 8) {
+    throw Error("Please enter strong password");
+  }
 
-    if(!email.length >= 8) {
-        throw Error("Please enter strong password")
-    }
+  if (!username.length >= 5) {
+    throw Error("Username is to short");
+  }
 
-    if(!username.length >= 5) {
-        throw Error("Username is to short")
-    }
-    
-    
-    // this will check if email already exists
+  // this will check if email already exists
 
-     const exists = await this.findOne({email})
-         // if the email exist this will throw an error
-     if(exists) {
-        throw Error( "Email is already used")
-    }
-    // salt basically make the hashing more safe 10 is the default
-    const salt = await bcrypt.genSalt(10)
-    // hash wil hash the password
-    const hash = await bcrypt.hash(password , salt)
-    /// this will create the user
-    const user = await this.create({email , password : hash , username})
+  const exists = await this.findOne({ email });
+  // if the email exist this will throw an error
+  if (exists) {
+    throw Error("Email is already used");
+  }
+  // salt basically make the hashing more safe 10 is the default
+  const salt = await bcrypt.genSalt(10);
+  // hash wil hash the password
+  const hash = await bcrypt.hash(password, salt);
+  /// this will create the user
+  const user = await this.create({ email, password: hash, username });
 
-    return user
-}
+  return user;
+};
 
-userSchema.statics.login = async function( email , password ) {
+userSchema.statics.login = async function (email, password) {
+  if (!email || !password) {
+    throw Error("Please fill all fields");
+  }
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw Error("Invalid login credentials");
+  }
 
-     if (!email || !password){
-        throw Error("Please fill all fields")
-     }
-     const user = await this.findOne({email})
-     if(!user) {
-        throw Error("Invalid login credentials")
-     }
+  const match = await bcrypt.compare(password, user.password);
 
-    const match = await bcrypt.compare(password , user.password )
-    
-    if(!match){
-        throw Error("Invalid login credentials")
-    }
-    
-    return user
-}
-const User = mongoose.model("users" , userSchema)
+  if (!match) {
+    throw Error("Invalid login credentials");
+  }
 
-module.exports = {User}
+  return user;
+};
+const User = mongoose.model("users", userSchema);
 
+module.exports = { User };
