@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDarkMode, useDrawer } from "../../../store/todoState";
+import { useDarkMode, useDrawer, useUserPanel } from "../../../store/todoState";
 import useWindowDimensions from "../../../hooks/getWindowDimensions";
 import { Dehaze, GitHub, Brightness4 } from "@mui/icons-material";
 import { useUser } from "../../../store/authState";
@@ -50,10 +50,17 @@ function DarkModeNavButton() {
 }
 
 function UserSettingsNavButton() {
+  const setIsUserPanelOpen = useUserPanel((store) => store.setIsUserPanelOpen);
+
   return (
-    <Link className=" nav-item" to={"/app/user/information"}>
+    <button
+      onClick={() => {
+        setIsUserPanelOpen(true);
+      }}
+      className="nav-item"
+    >
       <Person className="icon-button" />
-    </Link>
+    </button>
   );
 }
 

@@ -26,7 +26,7 @@ export const useDrawer = create(
     }),
     {
       name: "user-sidebar",
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     }
   )
 );
@@ -39,6 +39,20 @@ export const useDarkMode = create(
     }),
     {
       name: "dark-mode",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);
+
+export const useUserPanel = create(
+  persist(
+    (set, get) => ({
+      isUserPanelOpen: true,
+      setIsUserPanelOpen: () =>
+        set((item) => ({ isUserPanelOpen: !item.isUserPanelOpen })),
+    }),
+    {
+      name: "user-panel",
       storage: createJSONStorage(() => sessionStorage),
     }
   )
