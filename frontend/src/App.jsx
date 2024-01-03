@@ -76,21 +76,6 @@ export default function Router() {
             },
           ],
         },
-        {
-          path: "user",
-          element: <p>item</p>,
-          //loader: userLoader,
-          children: [
-            {
-              path: "information",
-              element: <p>information</p>,
-            },
-            {
-              path: "statistics",
-              element: <p>statistics</p>,
-            },
-          ],
-        },
       ],
     },
   ]);
