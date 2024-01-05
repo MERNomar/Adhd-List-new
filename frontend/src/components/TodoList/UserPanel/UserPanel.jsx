@@ -1,8 +1,25 @@
 import { useUserPanel } from "../../../store/todoState";
 import { motion } from "framer-motion";
+import ShowChartIcon from "@mui/icons-material/ShowChart";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { useState } from "react";
+import SettingsTap from "./SettingsTap";
+import StatisticsTap from "./StatisticsTap";
+
 export default function UserPanelNavBar() {
+  const [openTap, setOpenTap] = useState(true);
+  return (
+    <ModalFrame>
+      <UserPanelTaps setOpenTap={setOpenTap} openTap={openTap} />
+      {openTap ? <SettingsTap /> : <StatisticsTap />}
+    </ModalFrame>
+  );
+}
+
+function ModalFrame({ children }) {
   const setIsUserPanelOpen = useUserPanel((store) => store.setIsUserPanelOpen);
   const isUserPanelOpen = useUserPanel((store) => store.isUserPanelOpen);
+
   return (
     <motion.div
       onClick={() => {
@@ -19,7 +36,7 @@ export default function UserPanelNavBar() {
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="mx-auto my-auto text-white bg-black rounded w-[97%] h-[70%] sm:w-[70%] transition-all "
+        className="mx-auto my-auto text-white bg-[#1a1d23] rounded w-[97%] h-[500px]  lg:h-[700px] sm:w-[70%] transition-all "
         initial={{
           opacity: 0,
           scale: 0.75,
@@ -40,7 +57,39 @@ export default function UserPanelNavBar() {
             duration: 0.15,
           },
         }}
-      ></motion.div>
+      >
+        {children}
+      </motion.div>
     </motion.div>
+  );
+}
+
+function UserPanelTaps({ setOpenTap, openTap }) {
+  return (
+    <>
+      <div className={`w-full h-[10%] flex justify-around bg-[#0b0d0f] `}>
+        <button
+          onClick={() => {
+            setOpenTap(true);
+          }}
+          className={`w-full text-sm transition-colors bg-black lg:text-lg hover:bg-gray-900  ${
+            openTap && "bg-gray-800 hover:bg-gray-800"
+          }`}
+        >
+          Settings <ManageAccountsIcon />
+        </button>
+        <button
+          onClick={() => {
+            setOpenTap(false);
+          }}
+          className={`w-full text-sm transition-colors bg-black lg:text-lg hover:bg-gray-900 ${
+            !openTap && "bg-gray-800 hover:bg-gray-800"
+          }`}
+        >
+          Statistics
+          <ShowChartIcon />
+        </button>
+      </div>
+    </>
   );
 }
