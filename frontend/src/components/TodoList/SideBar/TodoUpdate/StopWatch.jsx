@@ -8,7 +8,7 @@ import Arrow from "../../../assets/svg/Arrow";
 
 export default function StopWatch() {
   const sidePanelItem = useDrawer((state) => state.sidePanelItem);
-  const setSidePanelItem = useDrawer((state) => state.updateSidePanel);
+  const setSidePanelItem = useDrawer((state) => state.setSidePanelItem);
   const timeUpdate = sidePanelItem.worked_time;
   const today = new Date();
   const currentDate = new Intl.DateTimeFormat("en-us", { dateStyle: "long" });
@@ -36,7 +36,6 @@ export default function StopWatch() {
     // time has to be at least 3 mins or the changes will not take place !
     if (minutes < 3) return;
     const currentTime = timeUpdate + minutes;
-    putUpdateTime({ id: sidePanelItem._id, time: currentTime });
     setSidePanelItem({ ...sidePanelItem, worked_time: currentTime });
   };
   // turning the timer on and off and reset in on session
