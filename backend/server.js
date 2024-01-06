@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const todoRoutes = require("./routes/todoRoutes");
 const userRoutes = require("./routes/userRoutes");
+const workDay = require("./routes/workDayRoutes");
 const categoryRootRoutes = require("./routes/categoryRootRoutes");
 
 // environment variables
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/category", categoryRootRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/todos", todoRoutes);
+app.use("/api/work-day", workDay);
 
 app.listen(port, () => {
   mongoose
