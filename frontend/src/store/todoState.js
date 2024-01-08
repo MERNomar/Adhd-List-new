@@ -10,6 +10,8 @@ export const useStore = create((set) => ({
   setCurrentPage: (currentPage) => set({ currentPage: currentPage }),
   currentRoot: "",
   setCurrentRoot: (currentRoot) => set({ currentRoot: currentRoot }),
+  workDays: [],
+  setWorkDays: (item) => set({ workDays: item }),
 }));
 
 export const useDrawer = create(

@@ -62,6 +62,11 @@ export const getRootCategories = async (token) => {
   return await getFunction(token, GET_ROOT_CATEGORY_ITEMS_PARAM);
 };
 
+export const getWorkDays = async (token) => {
+  const GET_WORK_DAYS_PARAM = `/work-day/get-work-day`;
+  return await getFunction(token, GET_WORK_DAYS_PARAM);
+};
+
 export const postTodo = async (todoItem, token) => {
   const POST_TODO_ITEM_PARAM = "/todos/post";
   return await postFunction(token, POST_TODO_ITEM_PARAM, todoItem);
@@ -70,6 +75,11 @@ export const postTodo = async (todoItem, token) => {
 export const postRootCategories = async (categoryItem, token) => {
   const POST_ROOT_CATEGORY_ITEM_PARAM = "/category/post-category-root";
   return await postFunction(token, POST_ROOT_CATEGORY_ITEM_PARAM, categoryItem);
+};
+
+export const postWokDay = async (workDayItem, token) => {
+  const POST_WORK_DAY_ITEM_PARAM = "/work-day/post-work-day";
+  return await postFunction(token, POST_WORK_DAY_ITEM_PARAM, workDayItem);
 };
 
 export const putUpdateTodo = async (id, token, sidePanelItem) => {
