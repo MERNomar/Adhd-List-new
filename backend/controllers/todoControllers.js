@@ -32,7 +32,7 @@ const deleteTodoById = (req, res) => {
 };
 
 const updateTodo = (req, res) => {
-  console.log(req.params.id);
+  console.log(req.body);
   const id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(400).json({ error: "Item was not found" });

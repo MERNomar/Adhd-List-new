@@ -1,104 +1,79 @@
 import ky from "ky";
 
+const getFunction = async (token, param) => {
+  try {
+    return await ky
+      .get(`/api/${param}`, {
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+      })
+      .json();
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+const postFunction = async (token, param, json) => {
+  try {
+    return await ky
+      .post(`/api/${param}`, {
+        json: json,
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+      })
+      .json();
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+const putFunction = async (token, param, json) => {
+  try {
+    return await ky
+      .put(`/api/${param}`, {
+        json: json,
+        headers: {
+          authorization: `bearer ${token}`,
+        },
+      })
+      .json();
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
 export const getTodos = async (token) => {
-  try {
-    return await ky
-      .get("/api/todos/get-all", {
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      })
-      .json();
-  } catch (err) {
-    console.log(err);
-  }
+  const GET_ALL_TODOS_PARAM = "/todos/get-all";
+  return await getFunction(token, GET_ALL_TODOS_PARAM);
 };
 
-export const postTodo = async (todo, token) => {
-  console.log(todo);
-  try {
-    return await ky
-      .post(`/api/todos/post`, {
-        json: todo,
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      })
-      .json();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const setCompleted = async (id, token, state) => {
-  try {
-    return await ky
-      .put(`/api/todos/update-todo/${id}`, {
-        json: { completed: state },
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      })
-      .json();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const getTodoItem = async (id) => {
-  try {
-    return await ky
-      .get(`/api/todos/get-todo/${id}`, {
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      })
-      .json();
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const putUpdateTodo = async ({ id, token, sidePanelItem }) => {
-  try {
-    return await ky
-      .put(`/api/todos/update-todo/${id}`, {
-        json: sidePanelItem,
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      })
-      .json();
-  } catch (err) {
-    console.log(err);
-  }
+export const getTodoItem = async (TODO_ID, token) => {
+  const GET_TODO_ITEM_PARAM = `/todos/get-todo/${TODO_ID}`;
+  return await getFunction(token, GET_TODO_ITEM_PARAM);
 };
 
 export const getRootCategories = async (token) => {
-  try {
-    return await ky
-      .get("/api/category/get-category-root", {
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      })
-      .json();
-  } catch (err) {
-    console.log(err);
-  }
+  const GET_ROOT_CATEGORY_ITEMS_PARAM = `/category/get-category-root`;
+  return await getFunction(token, GET_ROOT_CATEGORY_ITEMS_PARAM);
 };
 
-export const postRootCategories = async (item, token) => {
-  console.log(item);
-  try {
-    const test = await ky.post(`/api/category/post-category-root`, {
-      json: item,
-      headers: {
-        authorization: `bearer ${token}`,
-      },
-    });
-    return await test.json();
-  } catch (err) {
-    console.log(err);
-  }
+export const postTodo = async (todoItem, token) => {
+  const POST_TODO_ITEM_PARAM = "/todos/post";
+  return await postFunction(token, POST_TODO_ITEM_PARAM, todoItem);
+};
+
+export const postRootCategories = async (categoryItem, token) => {
+  const POST_ROOT_CATEGORY_ITEM_PARAM = "/category/post-category-root";
+  return await postFunction(token, POST_ROOT_CATEGORY_ITEM_PARAM, categoryItem);
+};
+
+export const putUpdateTodo = async (id, token, sidePanelItem) => {
+  const jsonObjectData = sidePanelItem;
+  const PUT_SET_COMPLETED_PARAM = `/todos/update-todo/${id}`;
+  return await putFunction(token, PUT_SET_COMPLETED_PARAM, jsonObjectData);
 };

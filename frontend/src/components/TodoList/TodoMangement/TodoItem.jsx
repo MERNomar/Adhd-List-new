@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { setCompleted } from "../../../myAPIS";
+import { putUpdateTodo } from "../../../myAPIS";
 import { useDrawer, useStore } from "../../../store/todoState";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
@@ -27,7 +27,7 @@ export default function TodoItem({ items, hiddenState }) {
   const handleClick = (e) => {
     e.stopPropagation();
     setCompletedState(!completedState);
-    setCompleted(_id, token, !completedState);
+    putUpdateTodo(_id, token, { completed: !completedState });
   };
   // global state
   //----

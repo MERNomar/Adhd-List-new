@@ -20,15 +20,11 @@ export default function SidePanel() {
   });
   useEffect(() => {
     if (!sidePanelItem) return;
-    putUpdateTodo({
-      id: sidePanelItem._id,
-      token,
-      sidePanelItem: {
-        steps: sidePanelItem.steps,
-        title: sidePanelItem.title,
-        category: sidePanelItem.category,
-        root_category: sidePanelItem.root_category,
-      },
+    putUpdateTodo(sidePanelItem._id, token, {
+      steps: sidePanelItem.steps,
+      title: sidePanelItem.title,
+      category: sidePanelItem.category,
+      root_category: sidePanelItem.root_category,
     });
     setAllTodos(allTodosUpdate);
   }, [sidePanelItem]);
